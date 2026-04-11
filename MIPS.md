@@ -249,7 +249,7 @@ html:
 <details>
 <summary><b>abs rd, rs</b> —— 求绝对值```absolute value```</summary>
 
-```mips
+```asm
 addu  rd, $zero, rs
 bgez  rs, 1
 sub   rd, $zero, rs
@@ -259,7 +259,7 @@ sub   rd, $zero, rs
 <details>
 <summary><b>beqz rs, label</b> —— 等于零则跳转```branch if equal to  zero```</summary>
 
-```mips
+```asm
 beq   rs, $zero, label
 ```
 </details>
@@ -267,7 +267,7 @@ beq   rs, $zero, label
 <details>
 <summary><b>bge rs, rt, label</b> —— 大于等于则跳转（有符号）</summary>
 
-```mips
+```asm
 slt   $at, rs, rt
 beq   $at, $zero, label
 ```
@@ -276,7 +276,7 @@ beq   $at, $zero, label
 <details>
 <summary><b>bgeu rs, rt, label</b> —— 大于等于则跳转（无符号）`branch if greater or equal`</summary>
 
-```mips
+```asm
 sltu  $at, rs, rt
 beq   $at, $zero, label
 ```
@@ -285,7 +285,7 @@ beq   $at, $zero, label
 <details>
 <summary><b>bgt rs, rt, label</b> —— 大于则跳转（有符号）`branch if greater than`</summary>
 
-```mips
+```asm
 slt   $at, rt, rs
 bne   $at, $zero, label
 ```
@@ -294,7 +294,7 @@ bne   $at, $zero, label
 <details>
 <summary><b>bgtu rs, rt, label</b> —— 大于则跳转（无符号）</summary>
 
-```mips
+```asm
 sltu  $at, rt, rs
 bne   $at, $zero, label
 ```
@@ -303,7 +303,7 @@ bne   $at, $zero, label
 <details>
 <summary><b>ble rs, rt, label</b> —— 小于等于则跳转（有符号）`branch if less or equal`</summary>
 
-```mips
+```asm
 slt   $at, rt, rs
 beq   $at, $zero, label
 ```
@@ -312,7 +312,7 @@ beq   $at, $zero, label
 <details>
 <summary><b>bleu rs, rt, label</b> —— 小于等于则跳转（无符号）</summary>
 
-```mips
+```asm
 sltu  $at, rt, rs
 beq   $at, $zero, label
 ```
@@ -330,7 +330,7 @@ bne   $at, $zero, label
 <details>
 <summary><b>bltu rs, rt, label</b> —— 小于则跳转（无符号）</summary>
 
-```mips
+```asm
 sltu  $at, rs, rt
 bne   $at, $zero, label
 ```
@@ -339,7 +339,7 @@ bne   $at, $zero, label
 <details>
 <summary><b>bnez rs, label</b> —— 不等于零则跳转`branch if not equal to zero`</summary>
 
-```mips
+```asm
 bne   rs, $zero, label
 ```
 </details>
@@ -347,7 +347,7 @@ bne   rs, $zero, label
 <details>
 <summary><b>b label</b> —— 无条件相对跳转</summary>
 
-```mips
+```asm
 bgez  $zero, label
 # 或
 beq   $zero, $zero, label
@@ -357,7 +357,7 @@ beq   $zero, $zero, label
 <details>
 <summary><b>div rd, rs, rt</b> —— 有符号除法（商）</summary>
 
-```mips
+```asm
 bne   rt, $zero, ok
 break $zero
 ok:
@@ -369,7 +369,7 @@ mflo  rd
 <details>
 <summary><b>divu rd, rs, rt</b> —— 无符号除法（商）</summary>
 
-```mips
+```asm
 bne   rt, $zero, ok
 break $zero
 ok:
@@ -381,7 +381,7 @@ mflo  rd
 <details>
 <summary><b>la rd, label</b> —— 加载地址</summary>
 
-```mips
+```asm
 lui   $at, %hi(label)
 ori   rd, $at, %lo(label)
 #符号 %hi() 和 %lo() 是 MIPS 汇编器提供的运算符，用来在汇编阶段把一个 32 位地址拆分成高 16 位和低 16 位。
@@ -391,7 +391,7 @@ ori   rd, $at, %lo(label)
 <details>
 <summary><b>li rd, value</b> （value ≥ 32768 或负数）</summary>
 
-```mips
+```asm
 lui   $at, %hi(value)
 ori   rd, $at, %lo(value)
 ```
@@ -400,7 +400,7 @@ ori   rd, $at, %lo(value)
 <details>
 <summary><b>li rd, value</b> （value < 32768）</summary>
 
-```mips
+```asm
 ori   rd, $zero, value
 ```
 </details>
@@ -408,7 +408,7 @@ ori   rd, $zero, value
 <details>
 <summary><b>move rd, rs</b> —— 寄存器间数据传送</summary>
 
-```mips
+```asm
 addu  rd, $zero, rs
 ```
 </details>
@@ -416,7 +416,7 @@ addu  rd, $zero, rs
 <details>
 <summary><b>mul rd, rs, rt</b> —— 乘法（不检查溢出）</summary>
 
-```mips
+```asm
 mult  rs, rt
 mflo  rd
 ```
@@ -425,7 +425,7 @@ mflo  rd
 <details>
 <summary><b>mulo rd, rs, rt</b> —— 有符号乘法（检查溢出）</summary>
 
-```mips
+```asm
 mult  rs, rt
 mfhi  $at
 mflo  rd
@@ -440,7 +440,7 @@ mflo  rd
 <details>
 <summary><b>mulou rd, rs, rt</b> —— 无符号乘法（检查溢出）</summary>
 
-```mips
+```asm
 multu rs, rt
 mfhi  $at
 beq   $at, $zero, ok
@@ -453,7 +453,7 @@ mflo  rd
 <details>
 <summary><b>neg rd, rs</b> —— 求补（有符号，检查溢出）</summary>
 
-```mips
+```asm
 sub   rd, $zero, rs
 ```
 </details>
@@ -461,7 +461,7 @@ sub   rd, $zero, rs
 <details>
 <summary><b>negu rd, rs</b> —— 求补（无符号）</summary>
 
-```mips
+```asm
 subu  rd, $zero, rs
 ```
 </details>
@@ -469,7 +469,7 @@ subu  rd, $zero, rs
 <details>
 <summary><b>nop</b> —— 空操作</summary>
 
-```mips
+```asm
 or    $zero, $zero, $zero
 ```
 </details>
@@ -477,7 +477,7 @@ or    $zero, $zero, $zero
 <details>
 <summary><b>not rd, rs</b> —— 按位取反</summary>
 
-```mips
+```asm
 nor   rd, rs, $zero
 ```
 </details>
@@ -485,7 +485,7 @@ nor   rd, rs, $zero
 <details>
 <summary><b>rem rd, rs, rt</b> —— 有符号除法（余数）`remain`</summary>
 
-```mips
+```asm
 bne   rt, $zero, ok
 break $zero
 ok:
@@ -493,7 +493,7 @@ div   rs, rt
 mfhi  rd
 ```
 注意老式写法：
-```mips
+```asm
 bne rt,$0,8  # 如果 rt != 0，跳过 8 条指令（即直接跳到 mfhi）
 break $0
 div rs,rt
@@ -504,7 +504,7 @@ mfhi rd
 <details>
 <summary><b>remu rd, rs, rt</b> —— 无符号除法（余数）</summary>
 
-```mips
+```asm
 bne   rt, $zero, ok
 break $zero
 ok:
@@ -516,7 +516,7 @@ mfhi  rd
 <details>
 <summary><b>rol rd, rs, rt</b> —— 循环左移（变量移位）`rotate left`</summary>
 
-```mips
+```asm
 subu  $at, $zero, rt
 srlv  $at, rs, $at
 sllv  rd, rs, rt
@@ -527,7 +527,7 @@ or    rd, rd, $at
 <details>
 <summary><b>rol rd, rs, sa</b> —— 循环左移（固定移位）</summary>
 
-```mips
+```asm
 srl   $at, rs, 32-sa
 sll   rd, rs, sa
 or    rd, rd, $at
@@ -537,7 +537,7 @@ or    rd, rd, $at
 <details>
 <summary><b>ror rd, rs, rt</b> —— 循环右移（变量移位）`rotate right`</summary>
 
-```mips
+```asm
 subu  $at, $zero, rt
 sllv  $at, rs, $at
 srlv  rd, rs, rt
@@ -548,7 +548,7 @@ or    rd, rd, $at
 <details>
 <summary><b>ror rd, rs, sa</b> —— 循环右移（固定移位）</summary>
 
-```mips
+```asm
 sll   $at, rs, 32-sa
 srl   rd, rs, sa
 or    rd, rd, $at
@@ -558,7 +558,7 @@ or    rd, rd, $at
 <details>
 <summary><b>seq rd, rs, rt</b> —— 相等则置 1`set if equal`</summary>
 
-```mips
+```asm
 beq   rt, rs, yes
 ori   rd, $zero, 0
 beq   $zero, $zero, skip
@@ -571,7 +571,7 @@ skip:
 <details>
 <summary><b>sge rd, rs, rt</b> —— 大于等于则置 1（有符号）`set if greater or equal`</summary>
 
-```mips
+```asm
 bne   rt, rs, yes
 ori   rd, $zero, 1
 beq   $zero, $zero, skip
@@ -584,7 +584,7 @@ skip:
 <details>
 <summary><b>sgeu rd, rs, rt</b> —— 大于等于则置 1（无符号）</summary>
 
-```mips
+```asm
 bne   rt, rs, yes
 ori   rd, $zero, 1
 beq   $zero, $zero, skip
@@ -597,7 +597,7 @@ skip:
 <details>
 <summary><b>sgt rd, rs, rt</b> —— 大于则置 1（有符号）`set if greater than`</summary>
 
-```mips
+```asm
 slt   rd, rt, rs
 ```
 </details>
@@ -605,7 +605,7 @@ slt   rd, rt, rs
 <details>
 <summary><b>sgtu rd, rs, rt</b> —— 大于则置 1（无符号）</summary>
 
-```mips
+```asm
 sltu  rd, rt, rs
 ```
 </details>
@@ -613,7 +613,7 @@ sltu  rd, rt, rs
 <details>
 <summary><b>sle rd, rs, rt</b> —— 小于等于则置 1（有符号）`set if less or equal`</summary>
 
-```mips
+```asm
 bne   rt, rs, yes
 ori   rd, $zero, 1
 beq   $zero, $zero, skip
@@ -626,7 +626,7 @@ skip:
 <details>
 <summary><b>sleu rd, rs, rt</b> —— 小于等于则置 1（无符号）</summary>
 
-```mips
+```asm
 bne   rt, rs, yes
 ori   rd, $zero, 1
 beq   $zero, $zero, skip
@@ -639,7 +639,7 @@ skip:
 <details>
 <summary><b>sne rd, rs, rt</b> —— 不等则置 1`set if not equal`</summary>
 
-```mips
+```asm
 beq   rt, rs, yes
 ori   rd, $zero, 1
 beq   $zero, $zero, skip
@@ -756,7 +756,7 @@ skip:
 `$t0` ~ `$t9` 是**临时寄存器**，按照 MIPS 调用约定，**被调用函数（A）不需要保存它们**。  
 因此 **Main 必须在调用 A 之前自己把 `$t0` 保存到栈中**，A 返回后再从栈中恢复。
 
-```mips
+```asm
 addiu $sp, $sp, -4
 sw    $t0, 0($sp)      # 保存 t0
 jal   A
@@ -1053,7 +1053,7 @@ MIPS 支持 5 种操作数寻址方式：
 1. 将 32 位立即数加载到寄存器（`lui` + `ori`）。
 2. 用 `sw` 将寄存器值存入内存。
 
-```mips
+```asm
 lui $at, 0x1234
 ori $at, $at, 0x5678   # $at = 0x12345678
 sw  $at, 0($t0)        # 存入 t0 指向的内存
@@ -1065,7 +1065,7 @@ sw  $at, 0($t0)        # 存入 t0 指向的内存
 
 16 位立即数可用 `ori` 或 `addiu` 直接加载到寄存器，再 `sw` 存出：
 
-```mips
+```asm
 ori $at, $zero, 0x1234
 sw  $at, 0($t0)
 ```
@@ -1076,7 +1076,7 @@ sw  $at, 0($t0)
 
 `0xfffffff` 实际是 `0x0fffffff`（28 位有效），需要 `lui` + `ori`：
 
-```mips
+```asm
 lui $t0, 0x0fff    # 高 16 位：0x0fff
 ori $t0, $t0, 0xffff   # 低 16 位：0xffff
 ```
@@ -1215,7 +1215,7 @@ ori $t0, $t0, 0xffff   # 低 16 位：0xffff
 <summary><b>移位指令 Q33：循环左移宏指令如何实现？</b></summary>
 
 `rol rd, rs, rt`（`rt` 指定移位数）：
-```mips
+```asm
 subu $at, $zero, rt   # $at = -rt (补码)，其低5位等效于 32 - rt
 srlv $at, rs, $at     # 取出将被移出的高位部分并右移对齐
 sllv rd, rs, rt       # 左移剩余部分
@@ -1232,7 +1232,7 @@ or   rd, rd, $at      # 合并
 <summary><b>移位指令 Q34：循环右移宏指令如何实现？</b></summary>
 
 `ror rd, rs, rt`：
-```mips
+```asm
 subu $at, $zero, rt   # $at = 32 - rt
 sllv $at, rs, $at     # 取出将被移出的低位部分并左移对齐
 srlv rd, rs, rt       # 右移剩余部分
@@ -1281,7 +1281,7 @@ or   rd, rd, $at
 
 - 宏指令：`beqz`, `bnez`, `bge`, `bgeu`, `bgt`, `bgtu`, `ble`, `bleu`, `blt`, `bltu`
 - 实现方式：结合 `slt`/`sltu` 与 `beq`/`bne`，例如 `blt rs, rt, label`：
-  ```mips
+  ```asm
   slt $at, rs, rt
   bne $at, $zero, label
   ```
@@ -1298,7 +1298,7 @@ or   rd, rd, $at
   4. 返回值通常从 `$v0` 读取。
 
 例如打印整数：
-```mips
+```asm
 li $v0, 1       # 调用号 1：print_int
 move $a0, $t0   # 要打印的值
 syscall
