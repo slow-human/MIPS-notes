@@ -31,7 +31,8 @@ html:
 ### 附录
 - [MARS 常用 SYSCALL 服务表](#mars-常用-syscall-服务表)
 
-
+$!!!:$
+**逻辑运算 0 扩展；其余 I 型指令一律符号扩展。u 不改变扩展方式，只改变运算时的溢出检测和数值解读方式(即最高位是作为符号位还是作为数值位)。**
 ## （壹）整数指令集
 
 ### 一、数据传送类指令
@@ -251,9 +252,13 @@ html:
 
 ```asm
 addu  rd, $zero, rs
-bgez  rs, 1
+bgez  rs, 1 #此处为行标号
 sub   rd, $zero, rs
+1:
 ```
+
+先加到rd寄存器里，如果rd值大于等于0，无事，否则用0减自己
+
 </details>
 
 <details>
@@ -271,6 +276,9 @@ beq   rs, $zero, label
 slt   $at, rs, rt
 beq   $at, $zero, label
 ```
+
+使用slt，大于等于即为不小于，即赋值0，再考虑与0的大小关系
+
 </details>
 
 <details>
@@ -288,6 +296,9 @@ beq   $at, $zero, label
 ```asm
 slt   $at, rt, rs
 bne   $at, $zero, label
+
+判断rs是不是大于rt,即判断rt是不是小于rs，即判断`$at`是不是1,即判断`$at`是不是不等于0(因为只有判断是否为0的，故在判断是否为1时应当判断是否不等于0!)
+
 ```
 </details>
 
@@ -316,12 +327,15 @@ beq   $at, $zero, label
 sltu  $at, rt, rs
 beq   $at, $zero, label
 ```
+
+rs小于等于rt即为rt大于等于rs,即rt不小于rs,如果rt小于rs,则置0
+
 </details>
 
 <details>
 <summary><b>blt rs, rt, label</b> —— 小于则跳转（有符号）`branch if less than`</summary>
 
-```mips
+```asm
 slt   $at, rs, rt
 bne   $at, $zero, label
 ```
@@ -494,7 +508,7 @@ mfhi  rd
 ```
 注意老式写法：
 ```asm
-bne rt,$0,8  # 如果 rt != 0，跳过 8 条指令（即直接跳到 mfhi）
+bne rt,$0,8  # 如果 rt != 0，跳过 8 字节即 2 条指令（即直接跳到 mfhi 行）
 break $0
 div rs,rt
 mfhi rd
@@ -517,7 +531,9 @@ mfhi  rd
 <summary><b>rol rd, rs, rt</b> —— 循环左移（变量移位）`rotate left`</summary>
 
 ```asm
-subu  $at, $zero, rt
+subu  $at, $zero, rt # $at = -rt (补码)，其低5位等效于 32 - rt
+#主要是因为我们要32-rt,但是这样的话，我们没有在rs上放立即数的方式
+不然我们就要用一个寄存器存放固定值32了
 srlv  $at, rs, $at
 sllv  rd, rs, rt
 or    rd, rd, $at
