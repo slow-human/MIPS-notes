@@ -31,8 +31,24 @@ html:
 ### 附录
 - [MARS 常用 SYSCALL 服务表](#mars-常用-syscall-服务表)
 
+### 前情:
+
 $!!!:$
 **逻辑运算 0 扩展；其余 I 型指令一律符号扩展。u 不改变扩展方式，只改变运算时的溢出检测和数值解读方式(即最高位是作为符号位还是作为数值位)。**
+
+注意：
+
+rd:register destination(一般用于在R指令格式中作目的寄存器)
+
+rs:register source(I、R指令格式中的第一源寄存器)
+
+rt:register target(I指令格式中的目的寄存器、R指令格式中的第二源寄存器)
+
+PC的问题:
+
+![alt text](image-2.png)
+
+
 ## （壹）整数指令集
 
 ### 一、数据传送类指令
@@ -72,6 +88,8 @@ $!!!:$
 - **`sw rt, offset(rs)`** `# store word [I]`  
   有效地址 = `rs` + 【符号扩展】的 16 位偏移量，将 `rt` 全部 32 位存入有效地址指向的内存（地址必为 4 的倍数）。
 
+![alt text](QQ_1776063370655.png)
+
 #### 3. 专用寄存器
 
 - **`mfhi rd`** `# move from HI register[R]`
@@ -97,6 +115,10 @@ $!!!:$
 - **`addiu rt, rs, imm`** `[I]`  
   `rs` + **符号扩展**至 32 位的立即数 → `rt`，不检查补码溢出。  
   > **注**：`unsigned` 仅代表不检查补码溢出，**不代表零扩展**。立即数仍进行【符号扩展】，只是将最高位视为数值位。
+
+**"检查"**这个词很微妙
+
+![alt text](QQ_1776063415681.png)
 
 #### 2. 减
 
@@ -366,6 +388,8 @@ bgez  $zero, label
 # 或
 beq   $zero, $zero, label
 ```
+![alt text](abbfbd647b4d26819fd607c4272678d2.jpg)
+
 </details>
 
 <details>
@@ -381,6 +405,19 @@ mflo  rd
 </details>
 
 <details>
+<summary><b>div rt, rs, imm(32)</b> —— 有符号除法（商）</summary>
+
+```asm
+li $at,imm  #实际上还要细分，li也有不同的展开，主要看imm的值
+bne   $at, $zero, ok
+break $zero
+ok:
+div   rs, $at
+mflo  rt
+```
+</details>
+
+<details>
 <summary><b>divu rd, rs, rt</b> —— 无符号除法（商）</summary>
 
 ```asm
@@ -389,6 +426,19 @@ break $zero
 ok:
 divu  rs, rt
 mflo  rd
+```
+</details>
+
+<details>
+<summary><b>divu rt, rs, imm(32)</b> —— 无符号除法（商）</summary>
+
+```asm
+li $at,imm  #实际上还要细分，li也有不同的展开，主要看imm的值
+bne   $at, $zero, ok
+break $zero
+ok:
+divu   rs, $at
+mflo  rt
 ```
 </details>
 
@@ -409,6 +459,12 @@ ori   rd, $at, %lo(label)
 lui   $at, %hi(value)
 ori   rd, $at, %lo(value)
 ```
+
+![alt text](1c142cb3a39d991f7df86715585b3883.png)
+
+有时候加载负数也可以使用:addiu
+
+![alt text](QQ_1776063244750.png)
 </details>
 
 <details>
@@ -417,6 +473,7 @@ ori   rd, $at, %lo(value)
 ```asm
 ori   rd, $zero, value
 ```
+PS:有时-3276value
 </details>
 
 <details>
@@ -435,6 +492,28 @@ mult  rs, rt
 mflo  rd
 ```
 </details>
+
+<details>
+<summary><b>mul rt, rs, imm(32)</b> —— 乘法（不检查溢出）</summary>
+
+```asm
+li $at,imm
+mult  rs, $at
+mflo  rt
+```
+</details>
+
+**注意:**
+
+没有`mulu`的用法，因为不管有无符号，其低32位数都相同:
+
+![alt text](f706e48ce017c2ae897b05df632d7eb4.png)
+
+![alt text](232fd6925026be1827efb355aa7d7e8f.png)
+
+![alt text](96ad14d33f7399f427ae61142b221833.png)
+
+
 
 <details>
 <summary><b>mulo rd, rs, rt</b> —— 有符号乘法（检查溢出）</summary>
@@ -516,6 +595,19 @@ mfhi rd
 </details>
 
 <details>
+<summary><b>rem rt, rs, imm(32)</b> —— 无符号除法（余数）</summary>
+
+```asm
+li $at,imm
+bne   $at, $zero, ok
+break $zero
+ok:
+div  rs, $at
+mfhi  rt
+```
+</details>
+
+<details>
 <summary><b>remu rd, rs, rt</b> —— 无符号除法（余数）</summary>
 
 ```asm
@@ -524,6 +616,19 @@ break $zero
 ok:
 divu  rs, rt
 mfhi  rd
+```
+</details>
+
+<details>
+<summary><b>remu rt, rs, imm(32)</b> —— 无符号除法（余数）</summary>
+
+```asm
+li $at,imm
+bne   $at, $zero, ok
+break $zero
+ok:
+divu  rs, $at
+mfhi  rt
 ```
 </details>
 
@@ -538,6 +643,8 @@ srlv  $at, rs, $at
 sllv  rd, rs, rt
 or    rd, rd, $at
 ```
+![alt text](025501f1e77e68a277741f3cf26318fe.jpg)
+
 </details>
 
 <details>
@@ -791,6 +898,8 @@ addiu $sp, $sp, 4
 `$s0` ~ `$s7` 是**保存寄存器**，调用约定规定**被调用函数（A）必须保证这些寄存器在返回时与调用前一致**。  
 因此 **Main 无需额外保存**，A 若需要使用 `$s0`，会在自己的代码开头保存并在返回前恢复。
 
+![alt text](ea061d017b441bb0eb48e2430c536976.jpg)
+
 Main 侧无需任何操作，直接调用即可。
 </details>
 
@@ -949,6 +1058,8 @@ MIPS 支持 5 种操作数寻址方式：
 ![alt text](QQ_1775903551861.png)
 
 ![alt text](QQ_1775903565462.png)
+
+![alt text](da8a50087702fb2c25f7b6a67c808959.jpg)
 
 **针对目标地址的寻址**
 *分支转移：*
