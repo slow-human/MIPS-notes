@@ -58,6 +58,10 @@
 <li><a href="#%E4%B8%89for%E5%BE%AA%E7%8E%AF%E7%9A%84%E7%BF%BB%E8%AF%91">FOR</a></li>
 <li><a href="#%E5%9B%9Bswitch%E7%9A%84%E7%BF%BB%E8%AF%91">SWITCH</a></li>
 </ul>
+<h3 id="全局变量与汇编命令">全局变量与汇编命令 </h3>
+<ul>
+<li><a href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E7%9A%84%E7%BF%BB%E8%AF%91%E5%92%8C%E6%B1%87%E7%BC%96%E5%91%BD%E4%BB%A4">全局变量与汇编命令</a></li>
+</ul>
 <h3 id="问答">问答 </h3>
 <ul>
 <li><a href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%E6%A6%82%E8%BF%B0%E4%B8%8E-mips-%E6%9E%B6%E6%9E%84">第一部分：概述与 MIPS 架构</a></li>
@@ -1033,7 +1037,7 @@ skip:
 <p>*PC中存放的是将要取出执行的指令所在内存单元的地址。PC的初始值由操作系统指定，即为将要执行程序的<strong>第一条指令</strong>所存放的内存单元的地址。*程序计数器中的地址通过总线传送到指令缓存的地址输入端。当一条指令已从内存取出并存放到指令寄存器(IR,<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mi>n</mi><mi>s</mi><mi>t</mi><mi>r</mi><mi>u</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mtext>&nbsp;</mtext><mi>R</mi><mi>e</mi><mi>g</mi><mi>i</mi><mi>s</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">Instruction\ Register</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="mord mathnormal">n</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">u</span><span class="mord mathnormal">c</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mspace">&nbsp;</span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mord mathnormal">i</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.0278em;">er</span></span></span></span>)中后，PC的增量为4，CPU便有了下一条指令所在内存位置的地址，以便CPU顺序提取下一条指令。</p>
 <h2 id="控制结构-1">控制结构 </h2>
 <hr>
-<h2 id="一-if-then-elseif-then的翻译">一、"if then else"&amp;"if then"的翻译 </h2>
+<h2 id="span-idif一-if-then-elseif-then的翻译span"><span id="if">一、"if then else"&amp;"if then"的翻译</span> </h2>
 <h3 id="if-then-else">"if then else" </h3>
 <ul>
 <li>伪代码:</li>
@@ -1082,7 +1086,7 @@ else
       move $t1<span class="token punctuation">,</span> $t0		    <span class="token comment"># t1=t0</span>
       <span class="token comment">#依旧考虑到then后顺序执行</span>
 out1<span class="token punctuation">:</span>
-</code></pre><h2 id="二-while的翻译">二、"while"的翻译 </h2>
+</code></pre><h2 id="span-idwhile二-while的翻译span"><span id="while">二、"while"的翻译</span> </h2>
 <ul>
 <li>伪代码:</li>
 </ul>
@@ -1125,7 +1129,7 @@ done<span class="token punctuation">:</span>
 <li>完成循环体后直接跳转至最初的条件分支语句。</li>
 <li>对if(条件){代码；break}做特殊处理：将break之前的代码放置在循环外，以break为标号，满足条件跳转至break标号。读者可自行绘制该代码的流程图。</li>
 </ul>
-<h2 id="三-for循环的翻译">三、"for循环"的翻译 </h2>
+<h2 id="span-idfor三-for循环的翻译span"><span id="for">三、"for循环"的翻译</span> </h2>
 <ul>
 <li>伪代码:</li>
 </ul>
@@ -1143,7 +1147,7 @@ loop<span class="token punctuation">:</span>
 </code></pre><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>这段代码实现了什么</mtext><mo>:</mo></mrow><annotation encoding="application/x-tex">这段代码实现了什么:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord cjk_fallback">这段代码实现了什么</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span></span></span></span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>用</mtext><mi mathvariant="normal">$</mi><mi>a</mi><mn>0</mn><mtext>记录从</mtext><mn>10</mn><mtext>加到</mtext><mn>1</mn><mtext>的结果</mtext></mrow><annotation encoding="application/x-tex">用\$a0记录从10加到1的结果</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8056em;vertical-align:-0.0556em;"></span><span class="mord cjk_fallback">用</span><span class="mord">$</span><span class="mord mathnormal">a</span><span class="mord">0</span><span class="mord cjk_fallback">记录从</span><span class="mord">10</span><span class="mord cjk_fallback">加到</span><span class="mord">1</span><span class="mord cjk_fallback">的结果</span></span></span></span></p>
 <p><img src="QQ_1777082982621.png" alt="alt text"></p>
 <p><img src="image-6.png" alt="alt text"></p>
-<h2 id="四-switch的翻译">四、"switch"的翻译 </h2>
+<h2 id="span-idswitch四-switch的翻译span"><span id="switch">四、"switch"的翻译</span> </h2>
 <ul>
 <li>伪代码:</li>
 </ul>
@@ -1217,7 +1221,7 @@ output<span class="token punctuation">:</span>
 <li>最后用指令jr $t2跳转至该地址，控制流程进入对应的分支。</li>
 <li>除最后一个以外，每个case分支的最后一条都是b语句，跳转到整个switch结构的出口。</li>
 </ul>
-<h2 id="全局变量的翻译和汇编命令">全局变量的翻译和汇编命令 </h2>
+<h2 id="span-idorder全局变量的翻译和汇编命令span"><span id="order">全局变量的翻译和汇编命令</span> </h2>
 <ul>
 <li>在汇编语言中，全局变量在数据段中分配，以标号表明变量的地址。</li>
 <li>MIPS常用的汇编命令如下:</li>
