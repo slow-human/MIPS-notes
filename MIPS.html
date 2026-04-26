@@ -73,6 +73,7 @@
 <li><a href="#%E4%BE%8B%E9%A2%98">课本例题</a></li>
 <li><a href="#%E4%B9%A0%E9%A2%98">课本习题</a></li>
 <li><a href="#%E6%8C%87%E4%BB%A4%E7%BB%83%E4%B9%A0">指令练习</a></li>
+<li><a href="21programs.pdf" target="_blank">📄 21个MIPS汇编程序（PDF）</a></li>
 </ul>
 <h3 id="易混淆注意点"><a href="#%E6%B3%A8%E6%84%8F%E7%82%B9">易混淆</a> </h3>
 <h3 id="附录">附录 </h3>
@@ -81,7 +82,7 @@
 <li><a href="#%E5%B0%8Ftips">Tips</a></li>
 </ul>
 <h3 id="前情">前情: </h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">!</mo><mo stretchy="false">!</mo><mo stretchy="false">!</mo><mo>:</mo></mrow><annotation encoding="application/x-tex">!!!:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mclose">!!!</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span></span></span></span><br>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>注意</mtext><mo stretchy="false">!</mo><mo stretchy="false">!</mo><mo stretchy="false">!</mo><mo>:</mo></mrow><annotation encoding="application/x-tex">注意!!!:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord cjk_fallback">注意</span><span class="mclose">!!!</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span></span></span></span><br>
 <strong>逻辑运算 0 扩展；其余 I 型指令一律符号扩展。u 不改变扩展方式，只改变运算时的溢出检测和数值解读方式(即最高位是作为符号位还是作为数值位)。</strong></p>
 <p>注意：</p>
 <p>rd:register destination(一般用于在R指令格式中作目的寄存器)</p>
@@ -298,7 +299,8 @@ lw   $t2, 0($t1)         ; 读取元素到 $t2
 <li><strong><code>lb rt, offset(rs)</code></strong> <code># load byte [I]</code><br>
 <code>rs</code> 的值加上<strong>符号扩展</strong>的 16 位偏移量形成有效地址，从有效地址指向的内存读取 <strong>8 位字节</strong>，<strong>符号扩展</strong>后加载到 <code>rt</code>。</li>
 </ul>
-<p>PS:即便偏移量为0,也应当写上，比如说 <code>lb $a0,0($t0)</code></p>
+<p>PS:即便偏移量为0,也应当写上，比如说 <code>lb $a0,0($t0)</code>或<code>lb $a0,($t0)</code></p>
+<p><strong>括号不能省，数字可以省（省略数字默认为 0）。</strong></p>
 <p>PS:先是offset进行符号扩展,然后再跟rs加</p>
 <ul>
 <li>
@@ -351,6 +353,7 @@ lw   $t2, 0($t1)         ; 读取元素到 $t2
 </ul>
 <p><img src="QQ_1776063370655.png" alt="alt text"></p>
 <p><img src="QQ_1776501027866.png" alt="alt text"></p>
+<p><img src="image-10.png" alt="alt text"></p>
 <p>load指令一定会扩展为32bits是因为要存入寄存器，而寄存器为32bits</p>
 <h4 id="3-专用寄存器">3. 专用寄存器 </h4>
 <ul>
@@ -1037,7 +1040,7 @@ skip:
 <p>*PC中存放的是将要取出执行的指令所在内存单元的地址。PC的初始值由操作系统指定，即为将要执行程序的<strong>第一条指令</strong>所存放的内存单元的地址。*程序计数器中的地址通过总线传送到指令缓存的地址输入端。当一条指令已从内存取出并存放到指令寄存器(IR,<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mi>n</mi><mi>s</mi><mi>t</mi><mi>r</mi><mi>u</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mtext>&nbsp;</mtext><mi>R</mi><mi>e</mi><mi>g</mi><mi>i</mi><mi>s</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">Instruction\ Register</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="mord mathnormal">n</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">u</span><span class="mord mathnormal">c</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mspace">&nbsp;</span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mord mathnormal">i</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.0278em;">er</span></span></span></span>)中后，PC的增量为4，CPU便有了下一条指令所在内存位置的地址，以便CPU顺序提取下一条指令。</p>
 <h2 id="控制结构-1">控制结构 </h2>
 <hr>
-<h2 id="span-idif一-if-then-elseif-then的翻译span"><span id="if">一、"if then else"&amp;"if then"的翻译</span> </h2>
+<h2 id="span-id一if-then-elseif-then的翻译一-if-then-elseif-then的翻译span"><span id="一if-then-elseif-then的翻译">一、"if then else"&amp;"if then"的翻译</span> </h2>
 <h3 id="if-then-else">"if then else" </h3>
 <ul>
 <li>伪代码:</li>
@@ -1086,7 +1089,7 @@ else
       move $t1<span class="token punctuation">,</span> $t0		    <span class="token comment"># t1=t0</span>
       <span class="token comment">#依旧考虑到then后顺序执行</span>
 out1<span class="token punctuation">:</span>
-</code></pre><h2 id="span-idwhile二-while的翻译span"><span id="while">二、"while"的翻译</span> </h2>
+</code></pre><h2 id="span-id二while的翻译二-while的翻译span"><span id="二while的翻译">二、"while"的翻译</span> </h2>
 <ul>
 <li>伪代码:</li>
 </ul>
@@ -1129,7 +1132,7 @@ done<span class="token punctuation">:</span>
 <li>完成循环体后直接跳转至最初的条件分支语句。</li>
 <li>对if(条件){代码；break}做特殊处理：将break之前的代码放置在循环外，以break为标号，满足条件跳转至break标号。读者可自行绘制该代码的流程图。</li>
 </ul>
-<h2 id="span-idfor三-for循环的翻译span"><span id="for">三、"for循环"的翻译</span> </h2>
+<h2 id="span-id三for循环的翻译三-for循环的翻译span"><span id="三for循环的翻译">三、"for循环"的翻译</span> </h2>
 <ul>
 <li>伪代码:</li>
 </ul>
@@ -1147,7 +1150,7 @@ loop<span class="token punctuation">:</span>
 </code></pre><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>这段代码实现了什么</mtext><mo>:</mo></mrow><annotation encoding="application/x-tex">这段代码实现了什么:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord cjk_fallback">这段代码实现了什么</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span></span></span></span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>用</mtext><mi mathvariant="normal">$</mi><mi>a</mi><mn>0</mn><mtext>记录从</mtext><mn>10</mn><mtext>加到</mtext><mn>1</mn><mtext>的结果</mtext></mrow><annotation encoding="application/x-tex">用\$a0记录从10加到1的结果</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8056em;vertical-align:-0.0556em;"></span><span class="mord cjk_fallback">用</span><span class="mord">$</span><span class="mord mathnormal">a</span><span class="mord">0</span><span class="mord cjk_fallback">记录从</span><span class="mord">10</span><span class="mord cjk_fallback">加到</span><span class="mord">1</span><span class="mord cjk_fallback">的结果</span></span></span></span></p>
 <p><img src="QQ_1777082982621.png" alt="alt text"></p>
 <p><img src="image-6.png" alt="alt text"></p>
-<h2 id="span-idswitch四-switch的翻译span"><span id="switch">四、"switch"的翻译</span> </h2>
+<h2 id="span-id四switch的翻译四-switch的翻译span"><span id="四switch的翻译">四、"switch"的翻译</span> </h2>
 <ul>
 <li>伪代码:</li>
 </ul>
@@ -1221,7 +1224,7 @@ output<span class="token punctuation">:</span>
 <li>最后用指令jr $t2跳转至该地址，控制流程进入对应的分支。</li>
 <li>除最后一个以外，每个case分支的最后一条都是b语句，跳转到整个switch结构的出口。</li>
 </ul>
-<h2 id="span-idorder全局变量的翻译和汇编命令span"><span id="order">全局变量的翻译和汇编命令</span> </h2>
+<h2 id="span-id全局变量的翻译和汇编命令全局变量的翻译和汇编命令span"><span id="全局变量的翻译和汇编命令">全局变量的翻译和汇编命令</span> </h2>
 <ul>
 <li>在汇编语言中，全局变量在数据段中分配，以标号表明变量的地址。</li>
 <li>MIPS常用的汇编命令如下:</li>
@@ -1398,7 +1401,8 @@ end<span class="token punctuation">:</span>      li    $v0<span class="token pun
           li    $v0<span class="token punctuation">,</span> <span class="token number">10</span>           <span class="token comment"># 终止程序，返回系统</span>
           syscall                 <span class="token comment"># </span>
 
-</code></pre><p>必须在文本文件的末尾留一个空白行。</p>
+</code></pre><p><img src="image-12.png" alt="alt text"></p>
+<p>必须在文本文件的末尾留一个空白行。</p>
 <p><strong>【注】</strong> 文件末尾留空行是早期汇编器和跨平台规范遗留的习惯(读取到'\n'结束)，MARS 中通常不必须，但按教材要求保留更稳妥。</p>
 <h1 id="mips-架构与指令集问答">MIPS 架构与指令集问答 </h1>
 <h2 id="第一部分概述与-mips-架构">第一部分：概述与 MIPS 架构 </h2>
@@ -1551,6 +1555,7 @@ addiu $sp, $sp, 4
 <li>其地址空间的布局，即,使用划分如图所示。地址空间0x0到0x003FFFFF的部分保留给操作系统使用，0x00400000到0x0FFFFFFF为文本段，0x10000000到0x7FFFFFFF为数据段和堆栈段。数据段由代码控制，一般按地址递增连续分配，即由下向上使用；栈则向下增长，即入栈的数据越多，栈顶的地址越小。这样做的好处是可以尽可能的利用地址空间存放数据。</li>
 </ul>
 <p><img src="image-3.png" alt="alt text"></p>
+<p><img src="image-11.png" alt="alt text"></p>
 <p>而对于<strong>字节在字中的存储顺序</strong></p>
 <blockquote>
 <p>1word-4byte-32bit<br>
@@ -2401,135 +2406,2146 @@ strEnd:
 </code></pre></details>
 <hr>
 <h1 id="习题">习题 </h1>
-<p>一、</p>
-<ol>
-<li>解释寄存器和ALU的区别。</li>
-<li>解释汇编语言和机器语言的区别。</li>
-<li>解释高速缓冲存储器和寄存器堆之间的区别。</li>
-<li>解释指令寄存器和程序计数器之间的区别。</li>
-<li>解释总线和控制线的区别。</li>
-<li>如果一个主频为500 MHz的计算机取指令和执行指令各需要一个时钟周期，那么该计算机指令执行率是多少？</li>
-<li>上述机器一分钟能执行多少条指令？</li>
-<li>假设有一个60年前的计算机，每秒执行1000条指令。在主频为500MHz的上述计算机上，执行1000条指令要花多长时间？</li>
-<li>MIPS指令格式有哪几种，其含义是什么？</li>
-<li>MIPS指令执行分为哪几个流水线阶段？</li>
-<li>假设指令jr $ra的PC值为0x0040040，寄存器ra中的数值为0x0040080，请仿造例1-1写出指令执行各阶段的细节。</li>
-</ol>
-<p>二、</p>
+<h1 id="习题一">习题一 </h1>
+<details>
+<summary><b>1. 解释寄存器和ALU的区别。</b></summary>
+<p><strong>寄存器</strong>是CPU内部用于<strong>暂存数据</strong>的高速存储单元，可以存放指令、地址或运算数据，具有记忆功能。</p>
+<p><strong>ALU（算术逻辑单元）<strong>是CPU中负责执行</strong>算术运算</strong>和<strong>逻辑运算</strong>的组合逻辑电路，不具备记忆功能，只能进行计算。</p>
+<p>简单比喻：寄存器是<strong>抽屉</strong>（存放东西），ALU是<strong>计算器</strong>（执行运算）。</p>
+</details>
+<details>
+<summary><b>2. 解释汇编语言和机器语言的区别。</b></summary>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">机器语言</th>
+<th style="text-align:left">汇编语言</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>形式</strong></td>
+<td style="text-align:left">二进制代码</td>
+<td style="text-align:left">助记符</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>可读性</strong></td>
+<td style="text-align:left">差（全是0和1）</td>
+<td style="text-align:left">较好（如add表示加法）</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>与硬件关系</strong></td>
+<td style="text-align:left">直接对应</td>
+<td style="text-align:left">一一对应（一条汇编对应一条机器指令）</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>需要翻译</strong></td>
+<td style="text-align:left">不需要</td>
+<td style="text-align:left">需要汇编器翻译</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>举例</strong></td>
+<td style="text-align:left"><code>0000 0010 0001 0000...</code></td>
+<td style="text-align:left"><code>add $t0, $t1, $t2</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+<summary><b>3. 解释高速缓冲存储器和寄存器堆之间的区别。</b></summary>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">高速缓冲存储器</th>
+<th style="text-align:left">寄存器堆</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>位置</strong></td>
+<td style="text-align:left">位于CPU和主存之间，可能在CPU芯片内</td>
+<td style="text-align:left">在CPU内部</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>用途</strong></td>
+<td style="text-align:left">缓存最近使用的指令和数据</td>
+<td style="text-align:left">直接为ALU提供操作数，存放中间结果</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>访问方式</strong></td>
+<td style="text-align:left">由硬件自动管理</td>
+<td style="text-align:left">由指令显式指定</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>速度</strong></td>
+<td style="text-align:left">快（但比寄存器慢）</td>
+<td style="text-align:left">最快</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>容量</strong></td>
+<td style="text-align:left">较大（KB~MB级）</td>
+<td style="text-align:left">小（MIPS为32个32位寄存器）</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>管理</strong></td>
+<td style="text-align:left">缓存控制器自动换入换出</td>
+<td style="text-align:left">程序员/编译器管理</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+<summary><b>4. 解释指令寄存器和程序计数器之间的区别。</b></summary>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">指令寄存器</th>
+<th style="text-align:left">程序计数器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>缩写</strong></td>
+<td style="text-align:left">IR</td>
+<td style="text-align:left">PC</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>存放内容</strong></td>
+<td style="text-align:left">当前<strong>正在执行</strong>的指令</td>
+<td style="text-align:left"><strong>下一条</strong>要执行指令的地址</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>作用时机</strong></td>
+<td style="text-align:left">译码和执行阶段</td>
+<td style="text-align:left">取指阶段</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>更新方式</strong></td>
+<td style="text-align:left">每取一条新指令就更新</td>
+<td style="text-align:left">自动加4，或由跳转指令修改</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+<summary><b>5. 解释总线和控制线的区别。</b></summary>
+<p><strong>总线</strong>是计算机中各部件之间<strong>传输数据</strong>的公共通道，包括：</p>
 <ul>
-<li>2.1 MIPS架构中对操作数寻址有几种方式？对目标地址寻址有哪几种方式？</li>
-<li>2.2 Load/Store架构是什么？请列举几个MIPS指令集中实现Load/Store架构的指令。</li>
-<li>2.3 MIPS加减法指令和乘除法指令有什么区别？</li>
-<li>2.4 MIPS逻辑操作中的not操作是如何实现的？</li>
-<li>2.5 MIPS条件转移设置指令和条件转移指令的组合可以实现种类繁多的条件分支。请按条件类别写出条件分支指令（包括宏指令）的完整列表。</li>
-<li>2.6 分支延迟槽是什么？为什么会有分支延迟问题？</li>
-<li>2.7 参考附录C,将下列汇编程序段翻译成机器语言，并写出完整的翻译过程。</li>
+<li>数据总线：传输数据</li>
+<li>地址总线：传输地址信息</li>
 </ul>
-<pre data-role="codeBlock" data-info="mips" class="language-mips mips"><code>la	 $a0, 0x10000000
-lw 	 $t0,($a0)
-mult $t0,$t0
+<p><strong>控制线</strong>是传输<strong>控制信号</strong>的专用线路，用于协调各部件工作，如读/写信号、中断请求信号等。</p>
+<blockquote>
+<p>总线运货，控制线指挥交通。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>6. 如果一个主频为500 MHz的计算机取指令和执行指令各需要一个时钟周期，那么该计算机指令执行率是多少？</b></summary>
+<p><strong>解：</strong></p>
+<p>主频 = 500 MHz，时钟周期 T = 1 / (500 × 10⁶) = 2 × 10⁻⁹ s = 2 ns</p>
+<p>每条指令需要 2 个时钟周期（取指 + 执行）。</p>
+<p>每秒可执行指令数 = (500 × 10⁶) / 2 = <strong>250 MIPS</strong></p>
+<p>答：指令执行率为 <strong>250 MIPS</strong>（每秒2.5亿条指令）。</p>
+</details>
+<details>
+<summary><b>7. 上述机器一分钟能执行多少条指令？</b></summary>
+<p><strong>解：</strong></p>
+<p>250 MIPS × 60 秒 = 15,000 × 10⁶ = <strong>150亿条</strong></p>
+<p>答：一分钟能执行 <strong>150亿条</strong> 指令。</p>
+</details>
+<details>
+<summary><b>8. 假设有一个60年前的计算机，每秒执行1000条指令。在主频为500MHz的上述计算机上，执行1000条指令要花多长时间？</b></summary>
+<p><strong>解：</strong></p>
+<p>500 MHz 计算机每秒执行 2.5 × 10⁸ 条指令。</p>
+<p>执行 1000 条指令所需时间 = 1000 / (250 × 10⁶) = 4 × 10⁻⁶ s = <strong>4 μs</strong></p>
+<p>答：执行1000条指令只需 <strong>4微秒</strong>。</p>
+</details>
+<details>
+<summary><b>9. MIPS指令格式有哪几种，其含义是什么？</b></summary>
+<p>MIPS指令有三种格式，均为32位固定长度：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">格式</th>
+<th style="text-align:left">字段组成</th>
+<th style="text-align:left">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>R格式</strong></td>
+<td style="text-align:left">op(6) + rs(5) + rt(5) + rd(5) + sa(5) + funct(6)</td>
+<td style="text-align:left">寄存器间运算，如add, sub, and</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>I格式</strong></td>
+<td style="text-align:left">op(6) + rs(5) + rt(5) + imm(16)</td>
+<td style="text-align:left">带立即数运算、访存、分支，如addi, lw, beq</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>J格式</strong></td>
+<td style="text-align:left">op(6) + address(26)</td>
+<td style="text-align:left">无条件跳转，如j, jal</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>op</strong>：操作码，确定指令类型</li>
+<li><strong>rs</strong>：第一源寄存器</li>
+<li><strong>rt</strong>：第二源寄存器（R型）或目的寄存器（I型）</li>
+<li><strong>rd</strong>：目的寄存器</li>
+<li><strong>sa</strong>：移位量</li>
+<li><strong>funct</strong>：功能码，配合op确定R型指令具体操作</li>
+<li><strong>imm</strong>：16位立即数</li>
+<li><strong>address</strong>：26位跳转目标地址</li>
+</ul>
+</details>
+<details>
+<summary><b>10. MIPS指令执行分为哪几个流水线阶段？</b></summary>
+<p>MIPS经典五阶段流水线：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">阶段</th>
+<th style="text-align:left">缩写</th>
+<th style="text-align:left">主要工作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>取指</strong></td>
+<td style="text-align:left">IF</td>
+<td style="text-align:left">PC→取指令→PC+4→放入IR</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>译码</strong></td>
+<td style="text-align:left">ID</td>
+<td style="text-align:left">解析IR，读取寄存器rs、rt的值（Register Read）</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>执行</strong></td>
+<td style="text-align:left">EX</td>
+<td style="text-align:left">ALU执行运算，或计算访存地址</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>访存</strong></td>
+<td style="text-align:left">MEM</td>
+<td style="text-align:left">访问数据存储器（lw读取，sw写入）</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>写回</strong></td>
+<td style="text-align:left">WB</td>
+<td style="text-align:left">将结果写回寄存器堆（rd或rt）</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+<summary><b>11. 假设指令jr $ra的PC值为0x00400040，寄存器ra中的数值为0x00400080，请仿造例1-1写出指令执行各阶段的细节。</b></summary>
+<p><strong>指令</strong>：<code>jr $ra</code>（R格式：op=000000, rs=$ra(31), rt=0, rd=0, sa=0, funct=001000）</p>
+<p><strong>1. 取指（IF）</strong></p>
+<ul>
+<li>取指地址 = PC = <code>0x00400040</code></li>
+<li>从内存取出32位机器指令，放入IR</li>
+<li>PC ← PC + 4 = <code>0x00400044</code></li>
+</ul>
+<p><strong>2. 译码（ID）</strong></p>
+<ul>
+<li>解析IR：op=000000, funct=001000 → 识别为<code>jr</code>指令</li>
+<li>读取rs(寄存器31)的值 → <code>$ra</code> = <code>0x00400080</code></li>
+</ul>
+<p><strong>3. 执行（EX）</strong></p>
+<ul>
+<li>计算跳转目标地址：PC ← <code>$ra</code> = <code>0x00400080</code></li>
+</ul>
+<p><strong>4. 访存（MEM）</strong></p>
+<ul>
+<li><code>jr</code>指令不访问数据存储器，本阶段无操作</li>
+</ul>
+<p><strong>5. 写回（WB）</strong></p>
+<ul>
+<li><code>jr</code>指令不写回寄存器，本阶段无操作</li>
+</ul>
+<p><strong>结果</strong>：程序跳转到 <code>0x00400080</code> 继续执行。</p>
+</details>
+<h1 id="习题二">习题二 </h1>
+<details>
+<summary><b>2.1 MIPS架构中对操作数寻址有几种方式？对目标地址寻址有哪几种方式？</b></summary>
+<p><strong>操作数寻址（3种）：</strong></p>
+<ol>
+<li><strong>立即数寻址</strong>：操作数在指令中，如 <code>addi $t0, $t1, 5</code></li>
+<li><strong>寄存器寻址</strong>：操作数在寄存器中，如 <code>add $t0, $t1, $t2</code></li>
+<li><strong>基址寻址</strong>：操作数在内存中，地址 = 寄存器 + 偏移量，如 <code>lw $t0, 100($t1)</code></li>
+</ol>
+<p><strong>目标地址寻址（3种）：</strong></p>
+<ol>
+<li><strong>伪直接寻址</strong>：用于 <code>j</code>/<code>jal</code>，26位地址与PC高4位拼接</li>
+<li><strong>寄存器间接寻址</strong>：用于 <code>jr</code>/<code>jalr</code>，地址在寄存器中</li>
+<li><strong>相对寻址</strong>：用于分支指令，地址 = PC + imm&lt;&lt;2</li>
+</ol>
+</details>
+<details>
+<summary><b>2.2 Load/Store架构是什么？请列举几个MIPS指令集中实现Load/Store架构的指令。</b></summary>
+<p><strong>Load/Store架构</strong>：CPU的运算指令<strong>只能对寄存器中的操作数</strong>进行运算，不能直接对内存中的数据进行运算。必须先用 <code>load</code> 指令把数据从内存搬到寄存器，运算结束后再用 <code>store</code> 指令存回内存。</p>
+<p><strong>Load指令</strong>：<code>lb</code>, <code>lbu</code>, <code>lh</code>, <code>lhu</code>, <code>lw</code></p>
+<p><strong>Store指令</strong>：<code>sb</code>, <code>sh</code>, <code>sw</code></p>
+</details>
+<details>
+<summary><b>2.3 MIPS加减法指令和乘除法指令有什么区别？</b></summary>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">加减法指令</th>
+<th style="text-align:left">乘除法指令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>结果位置</strong></td>
+<td style="text-align:left">通用寄存器（rd/rt）</td>
+<td style="text-align:left">特殊寄存器HI（高32位/余数）、LO（低32位/商）</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>需要额外指令</strong></td>
+<td style="text-align:left">不需要</td>
+<td style="text-align:left">需要 <code>mfhi</code>/<code>mflo</code> 取出结果</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>溢出处理</strong></td>
+<td style="text-align:left">add/sub检测溢出，addu/subu不检测</td>
+<td style="text-align:left">不产生溢出异常</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>立即数支持</strong></td>
+<td style="text-align:left">有（addi/addiu）</td>
+<td style="text-align:left">无（乘法用mul宏指令可间接实现）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>加减法直接写回寄存器，乘除法要先放在HI/LO里再取出来。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>2.4 MIPS逻辑操作中的not操作是如何实现的？</b></summary>
+<p>MIPS没有硬件 <code>not</code> 指令，通过<strong>宏指令</strong>实现：</p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>not rd, rs
+</code></pre><p>展开为：</p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>nor rd, rs, $zero
+</code></pre><p>原理：<code>rs NOR 0 = ~(rs | 0) = ~rs</code>，即按位取反。</p>
+</details>
+<details>
+<summary><b>2.5 MIPS条件转移设置指令和条件转移指令的组合可以实现种类繁多的条件分支。请按条件类别写出条件分支指令（包括宏指令）的完整列表。</b></summary>
+<p><strong>（1）与零比较（有符号）</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令</th>
+<th style="text-align:left">条件</th>
+<th style="text-align:left">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>blez</code></td>
+<td style="text-align:left">rs ≤ 0</td>
+<td style="text-align:left">硬件指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>bgtz</code></td>
+<td style="text-align:left">rs &gt; 0</td>
+<td style="text-align:left">硬件指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>bltz</code></td>
+<td style="text-align:left">rs &lt; 0</td>
+<td style="text-align:left">硬件指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>bgez</code></td>
+<td style="text-align:left">rs ≥ 0</td>
+<td style="text-align:left">硬件指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>beqz</code></td>
+<td style="text-align:left">rs = 0</td>
+<td style="text-align:left">宏指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>bnez</code></td>
+<td style="text-align:left">rs ≠ 0</td>
+<td style="text-align:left">宏指令</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（2）两寄存器比较（有符号）</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令</th>
+<th style="text-align:left">条件</th>
+<th style="text-align:left">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>beq</code></td>
+<td style="text-align:left">rs = rt</td>
+<td style="text-align:left">硬件指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>bne</code></td>
+<td style="text-align:left">rs ≠ rt</td>
+<td style="text-align:left">硬件指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>blt</code></td>
+<td style="text-align:left">rs &lt; rt</td>
+<td style="text-align:left">宏指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>ble</code></td>
+<td style="text-align:left">rs ≤ rt</td>
+<td style="text-align:left">宏指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>bgt</code></td>
+<td style="text-align:left">rs &gt; rt</td>
+<td style="text-align:left">宏指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>bge</code></td>
+<td style="text-align:left">rs ≥ rt</td>
+<td style="text-align:left">宏指令</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（3）两寄存器比较（无符号）</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令</th>
+<th style="text-align:left">条件</th>
+<th style="text-align:left">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>bltu</code></td>
+<td style="text-align:left">rs &lt; rt</td>
+<td style="text-align:left">宏指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>bleu</code></td>
+<td style="text-align:left">rs ≤ rt</td>
+<td style="text-align:left">宏观指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>bgtu</code></td>
+<td style="text-align:left">rs &gt; rt</td>
+<td style="text-align:left">宏指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>bgeu</code></td>
+<td style="text-align:left">rs ≥ rt</td>
+<td style="text-align:left">宏指令</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+<summary><b>2.6 分支延迟槽是什么？为什么会有分支延迟问题？</b></summary>
+<p><strong>分支延迟槽</strong>：在MIPS早期的流水线实现中，紧跟在<strong>分支指令后面的一条指令</strong>称为延迟槽指令。这条指令<strong>无论分支是否发生都会被执行</strong>。</p>
+<p><strong>原因</strong>：因为流水线在分支指令取指阶段（IF）的同时，已经把下一条指令取进来并开始译码了。等到分支指令真正执行完（EX阶段）、计算出新的PC时，下一条指令已经在流水线中了。</p>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li>编译器在延迟槽中填入一条有用的指令（通常是从分支前搬移过来的）</li>
+<li>如果找不到可用指令，填入 <code>nop</code></li>
+</ul>
+<blockquote>
+<p>现代MIPS可以设置"likely"位来取消延迟槽中指令的执行，但基础架构中延迟槽是经典特性。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>2.7 参考附录C，将下列汇编程序段翻译成机器语言，并写出完整的翻译过程。
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>la   $a0, 0x10000000
+lw   $t0, ($a0)
+mult $t0, $t0
 mflo $t1
-sw 	 $t1,4($a0)
-</code></pre><p>2.8 按指令执行5阶段具体描述最后一条指令sw <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mn>1</mn><mo separator="true">,</mo><mn>4</mn><mo stretchy="false">(</mo></mrow><annotation encoding="application/x-tex">t1, 4(</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">t</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">4</span><span class="mopen">(</span></span></span></span>a0)的执行过程。假设程序第一条指令地址为0x00400000，地址0x10000000中的内容为十进制的100。<br>
-2.9 上述程序段的功能是什么？</p>
-<p>三、</p>
+sw   $t1, 4($a0)
+</code></pre></b><p><b></b></p></summary><p></p>
+<p><strong>1. <code>la $a0, 0x10000000</code></strong></p>
 <ul>
-<li>
-<p>3.1 参考附录B，将以下伪代码翻译为MIPS汇编语言：</p>
-</li>
-<li>
-<p>(a) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mn>3</mn><mo>=</mo><mi>t</mi><mn>4</mn><mo>+</mo><mi>t</mi><mn>5</mn><mtext>–</mtext><mi>t</mi><mn>6</mn><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">t3 = t4 + t5 – t6;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">t</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">t</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">t</span><span class="mord">5–</span><span class="mord mathnormal">t</span><span class="mord">6</span><span class="mpunct">;</span></span></span></span><br>
-(b) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mn>3</mn><mo>=</mo><mi>t</mi><mn>2</mn><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><mi>s</mi><mn>1</mn><mtext>–</mtext><mn>54321</mn><mo stretchy="false">)</mo><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">s3 = t2 / (s1 – 54321);</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">s</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">t</span><span class="mord">2/</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mord">1–54321</span><span class="mclose">)</span><span class="mpunct">;</span></span></span></span><br>
-(c)  <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mi>p</mi><mo>=</mo><mi>s</mi><mi>p</mi><mtext>–</mtext><mn>16</mn><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">sp = sp –16;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">p</span><span class="mord">–16</span><span class="mpunct">;</span></span></span></span><br>
-(d) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>o</mi><mi>u</mi><mi>t</mi><mo>&lt;</mo><mo>&lt;</mo><mi>t</mi><mn>3</mn><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">cout &lt;&lt; t3;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6542em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">co</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">t</span><span class="mord">3</span><span class="mpunct">;</span></span></span></span><br>
-(e) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>i</mi><mi>n</mi><mo>&gt;</mo><mo>&gt;</mo><mi>t</mi><mn>0</mn><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">cin  &gt;&gt; t0;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6986em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal">in</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">t</span><span class="mord">0</span><span class="mpunct">;</span></span></span></span><br>
-(f) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mn>0</mn><mo>=</mo><mi mathvariant="normal">&amp;</mi><mi>a</mi><mi>r</mi><mi>r</mi><mi>a</mi><mi>y</mi><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">a0 = \&amp;array;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">a</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">&amp;</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mpunct">;</span></span></span></span><br>
-(g) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mn>8</mn><mo>=</mo><mi>M</mi><mi>e</mi><mi>m</mi><mo stretchy="false">(</mo><mi>a</mi><mn>0</mn><mo stretchy="false">)</mo><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">t8 = Mem(a0);</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">t</span><span class="mord">8</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="mord mathnormal">e</span><span class="mord mathnormal">m</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mord">0</span><span class="mclose">)</span><span class="mpunct">;</span></span></span></span><br>
-(h) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>e</mi><mi>m</mi><mo stretchy="false">(</mo><mi>a</mi><mn>0</mn><mo>+</mo><mn>16</mn><mo stretchy="false">)</mo><mo>=</mo><mn>32768</mn><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">Mem(a0+ 16) = 32768;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="mord mathnormal">e</span><span class="mord mathnormal">m</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">16</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">32768</span><span class="mpunct">;</span></span></span></span><br>
-(i) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>o</mi><mi>u</mi><mi>t</mi><mo>&lt;</mo><mo>&lt;</mo><mtext>“</mtext><mi>H</mi><mi>e</mi><mi>l</mi><mi>l</mi><mi>o</mi><mtext>&nbsp;</mtext><mi>W</mi><mi>o</mi><mi>r</mi><mi>l</mi><mi>d</mi><mtext>”</mtext><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">cout  &lt;&lt; “Hello\ World”;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6542em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">co</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">“</span><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">o</span><span class="mspace">&nbsp;</span><span class="mord mathnormal" style="margin-right:0.1389em;">W</span><span class="mord mathnormal" style="margin-right:0.0278em;">or</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">d</span><span class="mord">”</span><span class="mpunct">;</span></span></span></span><br>
-(j) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mi>f</mi><mo stretchy="false">(</mo><mi>t</mi><mn>0</mn><mo>&lt;</mo><mn>0</mn><mo stretchy="false">)</mo><mtext>&nbsp;</mtext><mi>t</mi><mi>h</mi><mi>e</mi><mi>n</mi><mtext>&nbsp;</mtext><mi>t</mi><mn>7</mn><mo>=</mo><mn>0</mn><mtext>–</mtext><mi>t</mi><mn>0</mn><mtext>&nbsp;&nbsp;</mtext><mi>e</mi><mi>l</mi><mi>s</mi><mi>e</mi><mtext>&nbsp;</mtext><mi>t</mi><mn>7</mn><mo>=</mo><mi>t</mi><mn>0</mn><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">If (t0 &lt; 0)\ then\ t7 = 0 – t0\ \  else\ t7 = t0;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mclose">)</span><span class="mspace">&nbsp;</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mspace">&nbsp;</span><span class="mord mathnormal">t</span><span class="mord">7</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">0–</span><span class="mord mathnormal">t</span><span class="mord">0</span><span class="mspace">&nbsp;</span><span class="mspace">&nbsp;</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">se</span><span class="mspace">&nbsp;</span><span class="mord mathnormal">t</span><span class="mord">7</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">t</span><span class="mord">0</span><span class="mpunct">;</span></span></span></span><br>
-(k) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mi>h</mi><mi>i</mi><mi>l</mi><mi>e</mi><mtext>&nbsp;</mtext><mo stretchy="false">(</mo><mtext>&nbsp;</mtext><mi>t</mi><mn>0</mn><mo stretchy="false">!</mo><mo>=</mo><mn>0</mn><mo stretchy="false">)</mo><mtext>&nbsp;</mtext><mo stretchy="false">{</mo><mi>s</mi><mn>1</mn><mo>=</mo><mi>s</mi><mn>1</mn><mo>+</mo><mi>t</mi><mn>0</mn><mo separator="true">;</mo><mtext>&nbsp;</mtext><mi>t</mi><mn>2</mn><mo>=</mo><mi>t</mi><mn>2</mn><mo>+</mo><mn>4</mn><mo separator="true">;</mo><mtext>&nbsp;</mtext><mi>t</mi><mn>0</mn><mo>=</mo><mi>M</mi><mi>e</mi><mi>m</mi><mo stretchy="false">(</mo><mi>t</mi><mn>2</mn><mo stretchy="false">)</mo><mo stretchy="false">}</mo><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">while\ (\ t0 != 0)\ \{ s1 = s1 + t0;\ t2 = t2 + 4;\ t0 = Mem(t2) \};</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="mord mathnormal">hi</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">e</span><span class="mspace">&nbsp;</span><span class="mopen">(</span><span class="mspace">&nbsp;</span><span class="mord mathnormal">t</span><span class="mord">0</span><span class="mclose">!</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mclose">)</span><span class="mspace">&nbsp;</span><span class="mopen">{</span><span class="mord mathnormal">s</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">s</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">t</span><span class="mord">0</span><span class="mpunct">;</span><span class="mspace">&nbsp;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">t</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">4</span><span class="mpunct">;</span><span class="mspace">&nbsp;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="mord mathnormal">e</span><span class="mord mathnormal">m</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mord">2</span><span class="mclose">)}</span><span class="mpunct">;</span></span></span></span><br>
-(l) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mi>o</mi><mi>r</mi><mtext>&nbsp;</mtext><mo stretchy="false">(</mo><mi>t</mi><mn>1</mn><mo>=</mo><mn>99</mn><mo separator="true">;</mo><mtext>&nbsp;</mtext><mi>t</mi><mn>1</mn><mo>&gt;</mo><mn>0</mn><mo separator="true">;</mo><mtext>&nbsp;</mtext><mi>t</mi><mn>1</mn><mo>=</mo><mi>t</mi><mn>1</mn><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mi>v</mi><mn>0</mn><mo>=</mo><mi>v</mi><mn>0</mn><mo>+</mo><mi>t</mi><mn>1</mn><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">for\ ( t1 = 99;\ t1 &gt; 0;\ t1=t1 -1)  v0 = v0 + t1;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.0278em;">or</span><span class="mspace">&nbsp;</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">99</span><span class="mpunct">;</span><span class="mspace">&nbsp;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">0</span><span class="mpunct">;</span><span class="mspace">&nbsp;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">t</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">t</span><span class="mord">1</span><span class="mpunct">;</span></span></span></span><br>
-(m) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mn>0</mn><mo>=</mo><mn>2147483647</mn><mo>−</mo><mn>2147483648</mn><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">t0 = 2147483647 - 2147483648;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">t</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">2147483647</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">2147483648</span><span class="mpunct">;</span></span></span></span><br>
-(n) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mn>0</mn><mo>=</mo><mo>−</mo><mn>1</mn><mo>∗</mo><mi>s</mi><mn>0</mn><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">s0 = -1 * s0;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">s</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">s</span><span class="mord">0</span><span class="mpunct">;</span></span></span></span><br>
-(o) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mn>1</mn><mo>=</mo><mi>s</mi><mn>1</mn><mo>∗</mo><mi>a</mi><mn>0</mn><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">s1 = s1 * a0;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">s</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">s</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">a</span><span class="mord">0</span><span class="mpunct">;</span></span></span></span><br>
-(p) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mn>2</mn><mo>=</mo><mi>s</mi><mi>q</mi><mi>r</mi><mi>t</mi><mo stretchy="false">(</mo><mi>s</mi><msup><mn>0</mn><mn>2</mn></msup><mo>+</mo><mn>56</mn><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mi>a</mi><mn>3</mn><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">s2 = sqrt(s0^2 + 56) / a3;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">s</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">t</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">56</span><span class="mclose">)</span><span class="mord">/</span><span class="mord mathnormal">a</span><span class="mord">3</span><span class="mpunct">;</span></span></span></span><br>
-(q) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mn>3</mn><mo>=</mo><mi>s</mi><mn>1</mn><mo>−</mo><mi>s</mi><mn>2</mn><mi mathvariant="normal">/</mi><mi>s</mi><mn>3</mn><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">s3 = s1 - s2 / s3;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">s</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">s</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">s</span><span class="mord">2/</span><span class="mord mathnormal">s</span><span class="mord">3</span><span class="mpunct">;</span></span></span></span><br>
-(r) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mn>4</mn><mo>=</mo><mi>s</mi><mn>4</mn><mo>∗</mo><mn>8</mn><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">s4 = s4 * 8;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">s</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">s</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">8</span><span class="mpunct">;</span></span></span></span><br>
-(s) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mn>5</mn><mo>=</mo><mi>π</mi><mo>∗</mo><mi>s</mi><mn>5</mn><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">s5 = \pi * s5;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">s</span><span class="mord">5</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4653em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">π</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">s</span><span class="mord">5</span><span class="mpunct">;</span></span></span></span></p>
-</li>
-<li>
-<p>3.2 分析上题伪代码表达式对应的汇编语言代码，计算读取和执行该代码所需的时钟周期数。假设读取和执行一条普通指令都需要一个时钟周期；乘法指令需要32个时钟周期，除法指令需要38个时钟周期。</p>
-</li>
-<li>
-<p>3.3 用MIPS汇编语言程序求以下表达式的值，并且该程序不改变“s”寄存器的内容。<br>
-<code>$t0 = ($s1 - $s0 / $s2) * $s4 ; </code></p>
-</li>
-<li>
-<p>3.4 用MIPS汇编语言程序高效实现以下表达式。<br>
-<code>$t0 = $s0 / 8 - 2 * $s1 + $s2;</code></p>
-</li>
-<li>
-<p>3.5 模仿图3-2，画出以下代码中变量的地址、空间分配、初值。</p>
-</li>
+<li><code>la</code> 是宏指令，展开为：</li>
 </ul>
-<pre data-role="codeBlock" data-info="mips" class="language-mips mips"><code>			.data
-string:	.ascii “ABCD”	
-crlfs:	.byte 13,10,0
-array1: .space 4	
-		.align 2	
-array2:	.word 100,200,300,400
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>lui $a0, 0x1000        # 加载高16位
+ori $a0, $a0, 0x0000   # 低16位为0，可省略
 </code></pre><ul>
-<li>3.6 将以下C++代码翻译成MIPS汇编代码。</li>
+<li><code>lui $a0, 0x1000</code>：
+<ul>
+<li>op=<code>001111</code>, rs=<code>00000</code>, rt=<code>00100</code>($a0), imm=<code>0001 0000 0000 0000</code></li>
+<li>机器码：<code>0x3C041000</code></li>
 </ul>
-<pre data-role="codeBlock" data-info="mips" class="language-mips mips"><code>int a[8]={10,23,33,5,20,77,13,28};
-char *msg=”max=”;
-int n=8,max;
-void main( ){
-		for(int i = 0; i &lt; n; i++)		
-		cout&lt;&lt;a[i]&lt;&lt;endl;
-max=a[0];
-		for(int i = 0; i &lt; n; i++)
-			if(max&lt;a[i])max=a[i];
-		cout&lt;&lt;msg&lt;&lt;max;
-}
-</code></pre><hr>
+</li>
+<li><code>ori $a0, $a0, 0x0000</code>（如果生成）：
+<ul>
+<li>op=<code>001101</code>, rs=<code>00100</code>, rt=<code>00100</code>, imm=<code>0000 0000 0000 0000</code></li>
+<li>机器码：<code>0x34840000</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>2. <code>lw $t0, ($a0)</code></strong></p>
+<ul>
+<li>等价于 <code>lw $t0, 0($a0)</code></li>
+<li>I格式：op=<code>100011</code>, rs=<code>00100</code>(<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mn>0</mn><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>r</mi><mi>t</mi><mo>=</mo><mi mathvariant="normal">‘</mi><mn>01000</mn><mi mathvariant="normal">‘</mi><mo stretchy="false">(</mo></mrow><annotation encoding="application/x-tex">a0), rt=`01000`(</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mord">0</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">‘01000‘</span><span class="mopen">(</span></span></span></span>t0), imm=<code>0000 0000 0000 0000</code></li>
+<li>机器码：<code>0x8C880000</code></li>
+</ul>
+<p><strong>3. <code>mult $t0, $t0</code></strong></p>
+<ul>
+<li>R格式：op=<code>000000</code>, rs=<code>01000</code>, rt=<code>01000</code>, rd=<code>00000</code>, sa=<code>00000</code>, funct=<code>011000</code></li>
+<li>机器码：<code>0x01080018</code></li>
+</ul>
+<p><strong>4. <code>mflo $t1</code></strong></p>
+<ul>
+<li>R格式：op=<code>000000</code>, rs=<code>00000</code>, rt=<code>00000</code>, rd=<code>01001</code>, sa=<code>00000</code>, funct=<code>010010</code></li>
+<li>机器码：<code>0x00004812</code></li>
+</ul>
+<p><strong>5. <code>sw $t1, 4($a0)</code></strong></p>
+<ul>
+<li>I格式：op=<code>101011</code>, rs=<code>00100</code>(<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mn>0</mn><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>r</mi><mi>t</mi><mo>=</mo><mi mathvariant="normal">‘</mi><mn>01001</mn><mi mathvariant="normal">‘</mi><mo stretchy="false">(</mo></mrow><annotation encoding="application/x-tex">a0), rt=`01001`(</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mord">0</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">‘01001‘</span><span class="mopen">(</span></span></span></span>t1), imm=<code>0000 0000 0000 0100</code></li>
+<li>机器码：<code>0xAC890004</code></li>
+</ul>
+</details>
+<details>
+<summary><b>2.8 按指令执行5阶段具体描述最后一条指令sw $t1, 4($a0)的执行过程。</b></summary>
+<p><strong>假设</strong>：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mn>0</mn><mo>=</mo><mn>0</mn><mi>x</mi><mn>10000000</mn><mtext>，</mtext></mrow><annotation encoding="application/x-tex">a0=0x10000000，</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">a</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">10000000</span><span class="mord cjk_fallback">，</span></span></span></span>t1=10000（100×100=10000，已在mflo获得）</p>
+<p><strong>1. 取指（IF）</strong></p>
+<ul>
+<li>从PC取指令：<code>sw $t1, 4($a0)</code> → IR</li>
+<li>PC ← PC + 4</li>
+</ul>
+<p><strong>2. 译码（ID）</strong></p>
+<ul>
+<li>识别为I格式：op=101011</li>
+<li>读取寄存器：
+<ul>
+<li>rs=$a0 → <strong>0x10000000</strong>（基址）</li>
+<li>rt=$t1 → <strong>10000</strong>（要存储的数据）</li>
+</ul>
+</li>
+<li>立即数 imm=4 → 符号扩展为32位：<code>0x00000004</code></li>
+</ul>
+<p><strong>3. 执行（EX）</strong></p>
+<ul>
+<li>ALU计算有效地址：0x10000000 + 4 = <strong>0x10000004</strong></li>
+</ul>
+<p><strong>4. 访存（MEM）</strong></p>
+<ul>
+<li>将$t1的值（10000）写入内存地址 0x10000004</li>
+<li>Mem[0x10000004] ← 10000</li>
+</ul>
+<p><strong>5. 写回（WB）</strong></p>
+<ul>
+<li>sw指令不写回寄存器，本阶段无操作</li>
+</ul>
+</details>
+<details>
+<summary><b>2.9 上述程序段的功能是什么？</b></summary>
+<p>该程序段的功能是：<strong>对内存地址 0x10000000 中的数进行平方运算，并将结果存入下一个字地址（0x10000004）中</strong>。</p>
+<ul>
+<li>加载地址 0x10000000 到 $a0</li>
+<li>从该地址取数（100）到 $t0</li>
+<li>自乘：100 × 100</li>
+<li>积（10000）存入 $t1</li>
+<li>将结果 10000 存入 0x10000004</li>
+</ul>
+<p><strong>功能：计算内存中一个整数的平方并存储。</strong></p>
+</details>
+<hr>
+<h1 id="习题三">习题三 </h1>
+<p><strong>3.1 参考附录B，将以下伪代码翻译为MIPS汇编语言：</strong></p>
+<details>
+<summary><b>(a) $t3 = $t4 + $t5 - $t6;</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>add $t0,$t4,$t5 # t0=t4+t5
+sub $t3,$t0,$t6	# t3=t0-t6
+
+</code></pre></details>
+<details>
+<summary><b>(b) $s3 = $t2 / ($s1 - 54321);</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>li   $t0, 54321 #错误写法:addi $t0,$s1,-54321(已超出16位)
+sub  $t0, $s1, $t0
+div  $s3, $t2,$t0
+
+</code></pre></details>
+<details>
+<summary><b>(c) $sp = $sp - 16;</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>addiu $sp, $sp, -16
+</code></pre></details>
+<details>
+<summary><b>(d) cout &lt;&lt; $t3;</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>li $v0,1		    #v0=1
+move $a0,$t3    #a0=t3
+syscall
+
+</code></pre></details>
+<details>
+<summary><b>(e) cin &gt;&gt; $t0;</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>li   $v0, 5
+syscall
+move $t0, $v0
+</code></pre></details>
+<details>
+<summary><b>(f) $a0 = &amp;array;</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>la   $a0, array
+</code></pre></details>
+<details>
+<summary><b>(g) $t8 = Mem($a0);</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>lw   $t8, 0($a0) 
+</code></pre><p><strong>寄存器 32 位 + 默认数据类型是字 + 伪代码约定 → Mem(a0) = lw。</strong></p>
+</details>
+<details>
+<summary><b>(h) Mem($a0 + 16) = 32768;</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>li   $t0, 32768 #不能用addi也不能用addiu
+sw   $t0, 16($a0)
+</code></pre><p>一个错误写法:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>addi $a0,$a0,16 #a0=a0+6 #$a0被改变了
+li $t0,32768
+sw $t0,$a0  #应为sw $t0,0($a0)
+</code></pre></details>
+<details>
+<summary><b>(i) cout &lt;&lt; "Hello World";</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>      .data
+msg:  .asciiz "Hello World"
+      .text
+      li   $v0, 4
+      la   $a0, msg
+      syscall
+</code></pre></details>
+<details>
+<summary><b>(j) If ($t0 &lt; 0) then $t7 = 0 - $t0; else $t7 = $t0;</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>      bgez $t0, else
+      sub  $t7, $zero, $t0
+      b    next
+else: 
+      move $t7, $t0
+next:
+</code></pre><blockquote>
+<p>等价于 <code>abs $t7, $t0</code></p>
+</blockquote>
+</details>
+<details>
+<summary><b>(k) while ($t0 != 0) { $s1 = $s1 + $t0; $t2 = $t2 + 4; $t0 = Mem($t2); }</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>loop: 
+      beqz $t0, break
+      add  $s1, $s1, $t0
+      addi $t2, $t2, 4
+      lw   $t0, 0($t2)
+      b    loop
+break:
+</code></pre></details>
+<details>
+<summary><b>(l) for ($t1 = 99; $t1 &gt; 0; $t1 = $t1 - 1) $v0 = $v0 + $t1;</b></summary>
+```
+      li $t1,99
+loop:
+      add $v0,$v0,$t1
+      addi $t1,$t1,-1
+      bgtz $t1,loop
+<pre data-role="codeBlock" data-info="" class="language-text"><code>```asm
+      li   $t1, 99
+      move $v0, $zero #视情况
+loop: 
+      blez $t1, done #考虑到第一次肯定成立，于是不在一开始判断
+      add  $v0, $v0, $t1
+      addi $t1, $t1, -1
+      b    loop
+done:
+</code></pre><p><strong>第一种更好</strong></p>
+</details>
+<details>
+<summary><b>(m) $t0 = 2147483647 - 2147483648;</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code># 常量表达式，编译时计算：2147483647 - (-2147483648) = 4294967295 = -1（32位补码）
+li   $t0, -1
+</code></pre></details>
+<details>
+<summary><b>(n) $s0 = -1 * $s0;</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>sub  $s0, $zero, $s0
+# 或 neg $s0, $s0
+</code></pre></details>
+<details>
+<summary><b>(o) $s1 = $s1 * $a0;</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>mult $s1, $a0
+mflo $s1
+#或者
+mul $s1,$s1,$a0
+</code></pre><p>两种写法的区别:第一种高位还在，第一种高位截断</p>
+</details>
+<details>
+<summary><b>(p) $s2 = sqrt($s0² + 56) / $a3;</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>mul  $t0, $s0, $s0
+addi $t0, $t0, 56
+# sqrt用浮点协处理器
+mtc1 $t0, $f0
+cvt.s.w $f0, $f0
+sqrt.s $f0, $f0
+cvt.w.s $f0, $f0
+mfc1 $t0, $f0
+div  $t0, $a3
+mflo $s2
+</code></pre></details>
+<details>
+<summary><b>(q) $s3 = $s1 - $s2 / $s3;</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>div  $s2, $s3
+mflo $at
+sub  $s3, $s1, $at
+#或者
+div $t0,$s2,$s3
+sub $s3,$s1,$t0
+
+</code></pre></details>
+<details>
+<summary><b>(r) $s4 = $s4 * 8;</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>sll  $s4, $s4, 3
+</code></pre></details>
+<details>
+<summary><b>(s) $s5 = π * $s5;（暂时不用看）</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>    .data
+pi: .float 3.14159
+    .text
+mtc1   $s5, $f0
+cvt.s.w $f0, $f0
+l.s    $f1, pi
+mul.s  $f0, $f0, $f1
+cvt.w.s $f0, $f0
+mfc1   $s5, $f0
+</code></pre></details>
+<hr>
+<details>
+<summary><b>3.2 分析上题伪代码表达式对应的汇编语言代码，计算读取和执行该代码所需的时钟周期数。</b></summary>
+<p>假设：普通指令取指+执行=2周期，乘法mult=32周期，除法div=38周期。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">小题</th>
+<th style="text-align:left">指令</th>
+<th style="text-align:center">周期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">(a)</td>
+<td style="text-align:left">add + sub</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:left">(b)</td>
+<td style="text-align:left">li + sub + div + mflo</td>
+<td style="text-align:center">2+2+38+2=44</td>
+</tr>
+<tr>
+<td style="text-align:left">(c)</td>
+<td style="text-align:left">addiu</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:left">(d)</td>
+<td style="text-align:left">li + move + syscall</td>
+<td style="text-align:center">6</td>
+</tr>
+<tr>
+<td style="text-align:left">(e)</td>
+<td style="text-align:left">li + syscall + move</td>
+<td style="text-align:center">6</td>
+</tr>
+<tr>
+<td style="text-align:left">(f)</td>
+<td style="text-align:left">la</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:left">(g)</td>
+<td style="text-align:left">lw</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:left">(h)</td>
+<td style="text-align:left">li + sw</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:left">(i)</td>
+<td style="text-align:left">li + la + syscall</td>
+<td style="text-align:center">6</td>
+</tr>
+<tr>
+<td style="text-align:left">(j)</td>
+<td style="text-align:left">bgez + sub + b + move</td>
+<td style="text-align:center">8</td>
+</tr>
+<tr>
+<td style="text-align:left">(k)</td>
+<td style="text-align:left">循环体×N: beqz+add+addi+lw+b=10周期/次</td>
+<td style="text-align:center">10N</td>
+</tr>
+<tr>
+<td style="text-align:left">(l)</td>
+<td style="text-align:left">初值2 + 循环99次×(blez+add+addi+b=8)</td>
+<td style="text-align:center">2+792=794</td>
+</tr>
+<tr>
+<td style="text-align:left">(m)</td>
+<td style="text-align:left">li</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:left">(n)</td>
+<td style="text-align:left">sub</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:left">(o)</td>
+<td style="text-align:left">mult + mflo</td>
+<td style="text-align:center">32+2=34</td>
+</tr>
+<tr>
+<td style="text-align:left">(p)</td>
+<td style="text-align:left">含浮点和div</td>
+<td style="text-align:center">~80</td>
+</tr>
+<tr>
+<td style="text-align:left">(q)</td>
+<td style="text-align:left">div + mflo + sub</td>
+<td style="text-align:center">38+2+2=42</td>
+</tr>
+<tr>
+<td style="text-align:left">(r)</td>
+<td style="text-align:left">sll</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:left">(s)</td>
+<td style="text-align:left">含浮点乘法</td>
+<td style="text-align:center">~20</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>乘除法是性能瓶颈。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>3.3 用MIPS汇编语言程序求以下表达式的值，并且该程序不改变"s"寄存器的内容。</b></summary>
+<p><code>$t0 = ($s1 - $s0 / $s2) * $s4 ;</code></p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>div  $s0, $s2
+mflo $at
+sub  $at, $s1, $at
+mult $at, $s4
+mflo $t0
+</code></pre><blockquote>
+<p>全程用 <code>$at</code> 存放中间结果，不修改 <code>$s0~$s4</code>。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>3.4 用MIPS汇编语言程序高效实现以下表达式。</b></summary>
+<p><code>$t0 = $s0 / 8 - 2 * $s1 + $s2;</code></p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>sra  $t0, $s0, 3         # ÷8
+sll  $at, $s1, 1         # ×2
+sub  $t0, $t0, $at
+add  $t0, $t0, $s2
+</code></pre><blockquote>
+<p>移位代替乘除法，高效！</p>
+</blockquote>
+</details>
+<details>
+<summary><b>3.5 模仿图3-2，画出以下代码中变量的地址、空间分配、初值。
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>        .data
+string: .asciiz "ABCD"
+crlfs:  .byte 13, 10, 0
+array1: .space 4
+        .align 2
+array2: .word 100, 200, 300, 400
+</code></pre></b><p><b></b></p></summary><p></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">地址</th>
+<th style="text-align:left">标签</th>
+<th style="text-align:left">内容</th>
+<th style="text-align:center">字节</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0x10010000</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">'A' (0x41)</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:left">0x10010001</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">'B' (0x42)</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:left">0x10010002</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">'C' (0x43)</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:left">0x10010003</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">'D' (0x44)</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:left">0x10010004</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">'\0'</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:left">0x10010005</td>
+<td style="text-align:left">crlfs</td>
+<td style="text-align:left">13 (CR)</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:left">0x10010006</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">10 (LF)</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:left">0x10010007</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">0 (NUL)</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:left">0x10010008</td>
+<td style="text-align:left">array1</td>
+<td style="text-align:left">未初始化(4字节)</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:left">0x1001000C</td>
+<td style="text-align:left">array2</td>
+<td style="text-align:left">100</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:left">0x10010010</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">200</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:left">0x10010014</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">300</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:left">0x10010018</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">400</td>
+<td style="text-align:center">4</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>.align 2</code> 使array2对齐到4的倍数（0x1001000C）。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>3.6 将以下C++代码翻译成MIPS汇编代码。
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-int">int</span> a<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">33</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">77</span><span class="token punctuation">,</span><span class="token number">13</span><span class="token punctuation">,</span><span class="token number">28</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-char">char</span> <span class="token operator">*</span>msg <span class="token operator">=</span> <span class="token string">"max="</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-int">int</span> n <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">,</span> max<span class="token punctuation">;</span>
+<span class="token keyword keyword-void">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword keyword-for">for</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        cout <span class="token operator">&lt;&lt;</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    max <span class="token operator">=</span> a<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-for">for</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>max <span class="token operator">&lt;</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> max <span class="token operator">=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> msg <span class="token operator">&lt;&lt;</span> max<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></b><p><b></b></p></summary><p></p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>.data
+a:      .word 10, 23, 33, 5, 20, 77, 13, 28
+msg:    .asciiz "max="
+newline:.asciiz "\n"
+n:      .word 8
+
+.text
+.globl main
+main:
+    # 输出数组元素
+    li   $t0, 0
+    lw   $t1, n
+loop1:
+    bge  $t0, $t1, end1
+    sll  $t2, $t0, 2
+    la   $t3, a
+    add  $t3, $t3, $t2
+    lw   $a0, 0($t3)
+    li   $v0, 1
+    syscall
+    li   $v0, 4
+    la   $a0, newline
+    syscall
+    addi $t0, $t0, 1
+    b    loop1
+end1:
+
+    # 找最大值
+    la   $t0, a
+    lw   $t1, 0($t0)          # max = a[0]
+    li   $t2, 1
+    lw   $t3, n
+loop2:
+    bge  $t2, $t3, print
+    sll  $t4, $t2, 2
+    add  $t4, $t0, $t4
+    lw   $t5, 0($t4)
+    ble  $t5, $t1, skip
+    move $t1, $t5
+skip:
+    addi $t2, $t2, 1
+    b    loop2
+
+print:
+    li   $v0, 4
+    la   $a0, msg
+    syscall
+    li   $v0, 1
+    move $a0, $t1
+    syscall
+    li   $v0, 10
+    syscall
+</code></pre></details>
+<h1 id="习题四">习题四 </h1>
+<h2 id="一-数制与编码">一、数制与编码 </h2>
+<details>
+<summary><b>4.1 将十进制数35和32转换成8位二进制数。</b></summary>
+<ul>
+<li><strong>35</strong> = 32 + 2 + 1 = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>5</mn></msup><mo>+</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><msup><mn>2</mn><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">2^5 + 2^1 + 2^0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span> = <strong>00100011₂</strong></li>
+<li><strong>32</strong> = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>5</mn></msup></mrow><annotation encoding="application/x-tex">2^5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span></span></span></span> = <strong>00100000₂</strong></li>
+</ul>
+</details>
+<details>
+<summary><b>4.2 使用乘2和加法将00010101和00011001转换成十进制数。</b></summary>
+<p><strong>00010101₂：</strong><br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mn>0</mn><mo>×</mo><msup><mn>2</mn><mn>7</mn></msup><mo>+</mo><mn>0</mn><mo>×</mo><msup><mn>2</mn><mn>6</mn></msup><mo>+</mo><mn>0</mn><mo>×</mo><msup><mn>2</mn><mn>5</mn></msup><mo>+</mo><mn>1</mn><mo>×</mo><msup><mn>2</mn><mn>4</mn></msup><mo>+</mo><mn>0</mn><mo>×</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><mn>1</mn><mo>×</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>0</mn><mo>×</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><mn>1</mn><mo>×</mo><msup><mn>2</mn><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">= 0\times2^7 + 0\times2^6 + 0\times2^5 + 1\times2^4 + 0\times2^3 + 1\times2^2 + 0\times2^1 + 1\times2^0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">7</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span><br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mn>16</mn><mo>+</mo><mn>4</mn><mo>+</mo><mn>1</mn><mo>=</mo><mn>21</mn></mrow><annotation encoding="application/x-tex">= 16 + 4 + 1 = 21</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">16</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">21</span></span></span></span></p>
+<p><strong>00011001₂：</strong><br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mn>16</mn><mo>+</mo><mn>8</mn><mo>+</mo><mn>1</mn><mo>=</mo><mn>25</mn></mrow><annotation encoding="application/x-tex">= 16 + 8 + 1 = 25</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">16</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">25</span></span></span></span></p>
+</details>
+<details>
+<summary><b>4.3 解释为何能够根据二进制数的低位判断数的奇偶性。</b></summary>
+<p>二进制数的最低位（LSB，bit 0）权重为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>0</mn></msup><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^0 = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>，其余位权重均为2的倍数。</p>
+<ul>
+<li>最低位为 <strong>0</strong>：该数为偶数（可被2整除）</li>
+<li>最低位为 <strong>1</strong>：该数为奇数（被2除余1）</li>
+</ul>
+<p>因此，只需检查最低位即可判断奇偶性。</p>
+</details>
+<details>
+<summary><b>4.4 将二进制数00010101和00011001转换成十六进制数。</b></summary>
+<p><strong>00010101₂：</strong></p>
+<ul>
+<li>高4位 <code>0001</code> = 0x1</li>
+<li>低4位 <code>0101</code> = 0x5</li>
+<li>结果：<strong>0x15</strong></li>
+</ul>
+<p><strong>00011001₂：</strong></p>
+<ul>
+<li>高4位 <code>0001</code> = 0x1</li>
+<li>低4位 <code>1001</code> = 0x9</li>
+<li>结果：<strong>0x19</strong></li>
+</ul>
+</details>
+<details>
+<summary><b>4.5 将十六进制数0x15和0xA9转换成十进制数。</b></summary>
+<ul>
+<li><strong>0x15</strong> = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>×</mo><msup><mn>16</mn><mn>1</mn></msup><mo>+</mo><mn>5</mn><mo>×</mo><msup><mn>16</mn><mn>0</mn></msup><mo>=</mo><mn>16</mn><mo>+</mo><mn>5</mn><mo>=</mo><mn>21</mn></mrow><annotation encoding="application/x-tex">1 \times 16^1 + 5 \times 16^0 = 16 + 5 = 21</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mord"><span class="mord">6</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">5</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">6</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">16</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">5</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">21</span></span></span></span></li>
+<li><strong>0xA9</strong> = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mo>×</mo><msup><mn>16</mn><mn>1</mn></msup><mo>+</mo><mn>9</mn><mo>×</mo><msup><mn>16</mn><mn>0</mn></msup><mo>=</mo><mn>160</mn><mo>+</mo><mn>9</mn><mo>=</mo><mn>169</mn></mrow><annotation encoding="application/x-tex">10 \times 16^1 + 9 \times 16^0 = 160 + 9 = 169</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">10</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mord"><span class="mord">6</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">9</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">6</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">160</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">9</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">169</span></span></span></span></li>
+</ul>
+</details>
+<details>
+<summary><b>4.6 将十进制数-35和-63转换成8位二进制补码表示。</b></summary>
+<p><strong>-35：</strong></p>
+<ol>
+<li>正35的二进制：00100011₂</li>
+<li>按位取反：11011100₂</li>
+<li>末位加1：<strong>11011101₂</strong></li>
+</ol>
+<p><strong>-63：</strong></p>
+<ol>
+<li>正63的二进制：00111111₂</li>
+<li>按位取反：11000000₂</li>
+<li>末位加1：<strong>11000001₂</strong></li>
+</ol>
+</details>
+<details>
+<summary><b>4.7 假设使用二进制补码，找到下列数的十进制数。</b></summary>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">二进制</th>
+<th style="text-align:left">最高位</th>
+<th style="text-align:left">转换</th>
+<th style="text-align:center">十进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">(a) 1000001</td>
+<td style="text-align:left">1（负数）</td>
+<td style="text-align:left">取反+1：0111111₂=63</td>
+<td style="text-align:center"><strong>-63</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">(b) 11111111</td>
+<td style="text-align:left">1（负数）</td>
+<td style="text-align:left">取反+1：00000001₂=1</td>
+<td style="text-align:center"><strong>-1</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">(c) 01010000</td>
+<td style="text-align:left">0（正数）</td>
+<td style="text-align:left">64+16=80</td>
+<td style="text-align:center"><strong>80</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">(d) 11100000</td>
+<td style="text-align:left">1（负数）</td>
+<td style="text-align:left">取反+1：00100000₂=32</td>
+<td style="text-align:center"><strong>-32</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">(e) 10000011</td>
+<td style="text-align:left">1（负数）</td>
+<td style="text-align:left">取反+1：01111101₂=125</td>
+<td style="text-align:center"><strong>-125</strong></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+<summary><b>4.8 假设使用二进制补码，将下表进行转换。</b></summary>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">16位二进制</th>
+<th style="text-align:left">十六进制</th>
+<th style="text-align:left">十进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1111111100111100</td>
+<td style="text-align:left">0xFF3C</td>
+<td style="text-align:left">-196</td>
+</tr>
+<tr>
+<td style="text-align:left">1111111111110100</td>
+<td style="text-align:left">0xFFF4</td>
+<td style="text-align:left">-12</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注：原表中0xFF88/-128、0x0011/-25的数据与二进制列不匹配，已根据实际二进制值修正。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>4.9 给定两个数的补码表示01101110和00011010，实施二进制加法，会发生溢出吗？为什么？</b></summary>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>  01101110  (110)
++ 00011010  ( 26)
+───────────
+  10001000  (136，但作为有符号数是-120)
+</code></pre><ul>
+<li>两个正数相加，结果最高位为1（表示负数）</li>
+<li><strong>发生溢出</strong>。因为8位有符号数范围是-128~127，110+26=136 &gt; 127，超出范围。</li>
+</ul>
+</details>
+<details>
+<summary><b>4.10 给定两个数的补码表示11101000和00010011，实施二进制减法，会发生溢出吗？为什么？</b></summary>
+<p>减法转化为加法：11101000 - 00010011 = 11101000 + (00010011的补码)</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>  11101000  (-24)
++ 11101101  (-19，是00010011取反+1)
+───────────
+  11010101  (-43)
+</code></pre><ul>
+<li>-24 + (-19) = -43，结果在-128~127范围内</li>
+<li><strong>不发生溢出</strong>。</li>
+</ul>
+</details>
+<details>
+<summary><b>4.11 加法运算中溢出和进位的区别是什么？</b></summary>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">进位（Carry）</th>
+<th style="text-align:left">溢出（Overflow）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>含义</strong></td>
+<td style="text-align:left">最高位运算产生向外的进位</td>
+<td style="text-align:left">结果超出有符号数表示范围</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>判断</strong></td>
+<td style="text-align:left">无符号数运算，最高位有进位</td>
+<td style="text-align:left">两正数加得负，或两负数加得正</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>用途</strong></td>
+<td style="text-align:left">无符号数运算检测</td>
+<td style="text-align:left">有符号数运算检测</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>进位 ≠ 溢出。例如：有符号 -1 + (-1) 有进位无溢出；127 + 1 无进位有溢出。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>4.12 将2位十六进制值0x88扩展成4位十六进制值。</b></summary>
+<p>0x88 = 10001000₂，最高位为1，符号扩展：</p>
+<p><strong>4位十六进制：0xFF88</strong></p>
+</details>
+<details>
+<summary><b>4.13 分支指令执行后PC的可能值。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>loop: addi $t4, $t4, -8       # PC = 0x00012344
+      sub  $t2, $t2, $t0      # PC = 0x00012348
+      bne  $t4, $t2, loop     # PC = 0x0001234C
+</code></pre><p>bne执行时PC已+4变为 <code>0x00012350</code>。</p>
+<ul>
+<li><strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mn>4</mn><mo mathvariant="normal">≠</mo></mrow><annotation encoding="application/x-tex">t4 ≠</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">t</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel"><span class="mrel"><span class="mord vbox"><span class="thinbox"><span class="rlap"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="inner"><span class="mord"><span class="mrel"></span></span></span><span class="fix"></span></span></span></span></span><span class="mspace nobreak"></span><span class="mrel">=</span></span></span></span></span>t2</strong>：PC = 0x00012350 + (imm &lt;&lt; 2)，跳回 loop → PC = <strong>0x00012344</strong></li>
+<li><strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mn>4</mn><mo>=</mo></mrow><annotation encoding="application/x-tex">t4 =</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">t</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span>t2</strong>：不跳转，PC = <strong>0x00012350</strong></li>
+</ul>
+</details>
+<details>
+<summary><b>4.14 补码运算与溢出判断。</b></summary>
+<p><strong>X = 10010100₂，Y = 00101100₂</strong></p>
+<p>十进制：</p>
+<ul>
+<li>X（负数）→ 取反+1：01101100₂ = 108 → <strong>X = -108</strong></li>
+<li>Y（正数）→ <strong>Y = 44</strong></li>
+</ul>
+<p>十六进制：</p>
+<ul>
+<li>X = <strong>0x94</strong>，Y = <strong>0x2C</strong></li>
+</ul>
+<p><strong>X + Y：</strong></p>
+<ul>
+<li>(-108) + 44 = -64 → 在范围内，<strong>无溢出</strong></li>
+</ul>
+<p><strong>X - Y：</strong></p>
+<ul>
+<li>(-108) - 44 = -152 &lt; -128 → <strong>有溢出</strong></li>
+</ul>
+<p><strong>Y - X：</strong></p>
+<ul>
+<li>44 - (-108) = 152 &gt; 127 → <strong>有溢出</strong></li>
+</ul>
+</details>
+<details>
+<summary><b>4.15 分支指令执行后PC的可能值及注释。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>loop: lw   $t0, 0($a0)    # PC=0x00012344, 从$a0指向的内存加载字到$t0
+      addi $a0, $a0, 4    # PC=0x00012348, 指针+4，指向下一个字
+      andi $t1, $t0, 1    # PC=0x0001234C, 取$t0的最低位(奇偶性)
+      beqz $t0, loop      # PC=0x00012350, $t0=0则跳回loop
+</code></pre><p>beqz执行时PC = 0x00012350 + 4 = 0x00012354。</p>
+<ul>
+<li><strong>$t0 = 0</strong>：跳回 loop → PC = <strong>0x00012344</strong></li>
+<li><strong>$t0 ≠ 0</strong>：不跳转 → PC = <strong>0x00012354</strong></li>
+</ul>
+</details>
+<hr>
+<h2 id="二-64位运算">二、64位运算 </h2>
+<details>
+<summary><b>4.16 64位无符号数加法。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code># 加数：(t1,t0) 和 (t3,t2)，结果：(t5,t4)
+addu $t4, $t0, $t2        # 低32位相加
+sltu $at, $t4, $t0        # 检测低32位相加是否产生进位
+addu $t5, $t1, $t3        # 高32位相加
+addu $t5, $t5, $at        # 加上进位
+</code></pre><blockquote>
+<p>原理：64位加法 = 低32位加法 + 高32位加法 + 进位。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>4.17 以16进制输出64位数。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code># 64位数在(t5, t4)中，输出高32位和低32位的十六进制
+li   $v0, 34               # print_hex
+move $a0, $t5
+syscall
+move $a0, $t4
+syscall
+</code></pre></details>
+<hr>
+<h2 id="三-程序设计">三、程序设计 </h2>
+<details>
+<summary><b>5.1 计算chico标签最初100个数据字的总和。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>.data
+chico: .word 100个数据...
+
+.text
+    la   $t0, chico         # 数组指针
+    li   $t1, 100           # 循环次数
+    li   $t2, 0             # sum = 0
+loop:
+    lw   $t3, 0($t0)
+    add  $t2, $t2, $t3
+    addi $t0, $t0, 4
+    addi $t1, $t1, -1
+    bnez $t1, loop
+</code></pre></details>
+<details>
+<summary><b>5.2 将以SRC开始连续100个字移动到DEST。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>    la   $t0, SRC
+    la   $t1, DEST
+    li   $t2, 100
+loop:
+    lw   $t3, 0($t0)
+    sw   $t3, 0($t1)
+    addi $t0, $t0, 4
+    addi $t1, $t1, 4
+    addi $t2, $t2, -1
+    bnez $t2, loop
+</code></pre></details>
+<details>
+<summary><b>5.3 函数ABS：返回$a0的绝对值。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>ABS:
+    bgez $a0, done
+    sub  $a0, $zero, $a0
+done:
+    jr   $ra
+</code></pre></details>
+<details>
+<summary><b>5.4 函数PENO：求正奇数之和与负偶数之和。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>PENO:
+    li   $v0, 0             # 正奇数之和
+    li   $v1, 0             # 负偶数之和
+loop:
+    beqz $a1, done
+    lw   $t0, 0($a0)
+    # 判断正奇数
+    blez $t0, check_even
+    andi $t1, $t0, 1
+    beqz $t1, check_even
+    add  $v0, $v0, $t0
+    b    next
+check_even:
+    bgez $t0, next
+    andi $t1, $t0, 1
+    bnez $t1, next
+    add  $v1, $v1, $t0
+next:
+    addi $a0, $a0, 4
+    addi $a1, $a1, -1
+    b    loop
+done:
+    jr   $ra
+</code></pre></details>
+<details>
+<summary><b>5.5 函数SUM(N)：用乘法和移位求1到N之和。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>SUM:
+    # S = N(N+1)/2
+    addi $t0, $a0, 1
+    mult $a0, $t0
+    mflo $v0
+    sra  $v0, $v0, 1       # ÷2
+    jr   $ra
+</code></pre></details>
+<details>
+<summary><b>5.6 函数FIB：存储斐波那契数列前N项。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>FIB:
+    li   $t0, 1
+    li   $t1, 1
+    li   $t2, 0             # 计数器
+loop:
+    beq  $t2, $a0, done
+    sw   $t0, 0($a1)
+    move $t3, $t0
+    move $t0, $t1
+    add  $t1, $t3, $t1
+    addi $a1, $a1, 4
+    addi $t2, $t2, 1
+    b    loop
+done:
+    jr   $ra
+</code></pre></details>
+<details>
+<summary><b>5.7 三个整数从小到大排序。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>sort3:
+    # 比较$a0和$a1
+    ble  $a0, $a1, skip1
+    move $at, $a0
+    move $a0, $a1
+    move $a1, $at
+skip1:
+    # 比较$a1和$a2
+    ble  $a1, $a2, skip2
+    move $at, $a1
+    move $a1, $a2
+    move $a2, $at
+    # 再比较$a0和$a1
+    ble  $a0, $a1, skip2
+    move $at, $a0
+    move $a0, $a1
+    move $a1, $at
+skip2:
+    jr   $ra
+</code></pre></details>
+<details>
+<summary><b>5.8 用移位实现2的倍数的乘除法。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>.data
+Z: .space 200               # 50个字
+.text
+main:
+    li   $t0, 56            # Y = 56
+    li   $t1, 20            # K = 20
+    # K / 4 = K &gt;&gt; 2
+    sra  $t2, $t1, 2        # K/4
+    addi $t2, $t2, 210      # K/4 + 210
+    sll  $t2, $t2, 4        # * 16
+    sub  $t0, $t0, $t2      # Y - 16*(K/4+210)
+    sll  $t3, $t1, 2        # K*4 (字偏移)
+    sw   $t0, Z($t3)        # Z[K] = ...
+</code></pre></details>
+<details>
+<summary><b>5.9 求N×N二维数组主对角线之和。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>SumMain:
+    li   $v0, 0
+    li   $t0, 0
+loop:
+    beq  $t0, $a1, done
+    sll  $t1, $t0, 2
+    mul  $t2, $t0, $a1
+    sll  $t2, $t2, 2
+    add  $t2, $a0, $t2
+    add  $t2, $t2, $t1
+    lw   $t3, 0($t2)
+    add  $v0, $v0, $t3
+    addi $t0, $t0, 1
+    b    loop
+done:
+    jr   $ra
+</code></pre><blockquote>
+<p>N=4时，循环体约6条指令 × 4次迭代 = 24条指令。每条2周期共约48周期 + 访存开销。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>5.10 计算2×2矩阵的秩。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>Det:
+    lw   $t0, 0($a0)        # a[0][0]
+    lw   $t1, 4($a0)        # a[0][1]
+    lw   $t2, 8($a0)        # a[1][0]
+    lw   $t3, 12($a0)       # a[1][1]
+    mult $t0, $t3
+    mflo $t0
+    mult $t1, $t2
+    mflo $t1
+    sub  $v0, $t0, $t1
+    jr   $ra
+</code></pre><blockquote>
+<p>2条乘法指令(各32周期) = 64周期 + 8条普通指令 = 约80周期。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>5.11 数组越界检测。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>.data
+zap: .space 200
+.text
+    # 检查地址是否字对齐
+    andi $at, $a0, 3         # 低2位必须为0
+    bnez $at, Error
+    # 检查是否越界(0 ≤ $a0 ≤ 196)
+    li   $at, 196
+    bgt  $a0, $at, Error
+    bltz $a0, Error
+    # 合法，执行存储
+    la   $at, zap
+    add  $at, $at, $a0
+    sw   $s0, 0($at)
+    b    done
+Error:
+    # 越界处理
+done:
+</code></pre></details>
+<details>
+<summary><b>5.12 统计数组中能被4整除的元素个数。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>CountDiv4:
+    li   $v0, 0
+loop:
+    beqz $a1, done
+    lw   $t0, 0($a0)
+    addi $a0, $a0, 4
+    addi $a1, $a1, -1
+    andi $at, $t0, 3         # 被4整除⇔低2位为0
+    bnez $at, loop
+    addi $v0, $v0, 1
+    b    loop
+done:
+    jr   $ra
+</code></pre></details>
+<details>
+<summary><b>5.13 右对齐打印十进制值函数。</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>Decout:
+    move $t0, $a0            # 保存要打印的值
+    la   $t1, buf
+    li   $t2, 11             # 缓冲区末尾索引
+    sb   $0, 12($t1)         # 字符串结束符
+    # 填充空格
+    li   $t8, 0x20
+space:
+    add  $t9, $t1, $t2
+    sb   $t8, ($t9)
+    addi $t2, $t2, -1
+    bgez $t2, space
+    # 转换为十进制
+    abs  $t3, $t0
+    li   $t2, 11
+    li   $t9, 10
+    add  $t1, $t1, $t2
+loop:
+    div  $t3, $t9
+    mflo $t3
+    mfhi $t4
+    addi $t4, $t4, 0x30
+    sb   $t4, ($t1)
+    addi $t1, $t1, -1
+    beqz $t3, sign
+    b    loop
+sign:
+    bgez $t0, ret
+    li   $t8, 0x2d           # '-'
+    sb   $t8, ($t1)
+ret:
+    jr   $ra
+</code></pre></details>
+<details>
+<summary><b>5.14 将例5-3含查错的读取十进制值函数改写为C/C++代码。</b></summary>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-int">int</span> <span class="token function">Decin</span><span class="token punctuation">(</span><span class="token keyword keyword-char">char</span> <span class="token operator">*</span>buffer<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> length<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> <span class="token operator">*</span>status<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 跳过前导空格</span>
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token operator">*</span>buffer <span class="token operator">==</span> <span class="token char">' '</span> <span class="token operator">||</span> <span class="token operator">*</span>buffer <span class="token operator">==</span> <span class="token char">'\t'</span><span class="token punctuation">)</span> buffer<span class="token operator">++</span><span class="token punctuation">;</span>
+
+    <span class="token keyword keyword-int">int</span> sign <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token operator">*</span>buffer <span class="token operator">==</span> <span class="token char">'-'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sign <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        buffer<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-int">int</span> value <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> has_digit <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token operator">*</span>buffer <span class="token operator">&gt;=</span> <span class="token char">'0'</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">*</span>buffer <span class="token operator">&lt;=</span> <span class="token char">'9'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        value <span class="token operator">=</span> value <span class="token operator">*</span> <span class="token number">10</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token operator">*</span>buffer <span class="token operator">-</span> <span class="token char">'0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        buffer<span class="token operator">++</span><span class="token punctuation">;</span>
+        has_digit <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 溢出检测（简化）</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>value <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token operator">*</span>status <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>    <span class="token comment">// 溢出</span>
+            <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>has_digit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token operator">*</span>status <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">;</span>        <span class="token comment">// 无有效数字</span>
+        <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token operator">*</span>status <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> sign <span class="token operator">*</span> value<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></details>
+<hr>
 <h1 id="指令练习">指令练习 </h1>
-<h3 id="算术运算类指令练习">算术运算类指令练习： </h3>
-<ol>
-<li>计算表达式10x+y</li>
-<li>计算表达式ax2+bx+c</li>
-</ol>
-<h3 id="逻辑运算类指令练习">逻辑运算类指令练习： </h3>
-<ol>
-<li>寄存器a1的位0和位15不变，其他清零</li>
-<li>取出寄存器a0的低7位</li>
-<li>将<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mn>0</mn><mtext>中的值低</mtext><mn>6</mn><mtext>位清零后移动到</mtext></mrow><annotation encoding="application/x-tex">t0 中的值低6位清零后移动到</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">t</span><span class="mord">0</span><span class="mord cjk_fallback">中的值低</span><span class="mord">6</span><span class="mord cjk_fallback">位清零后移动到</span></span></span></span>t1中</li>
-<li>寄存器 a1的位7和位31置1，其余不变</li>
-<li>将<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mn>0</mn><mtext>中的值低</mtext><mn>6</mn><mtext>位置</mtext><mn>1</mn><mtext>后移动到</mtext></mrow><annotation encoding="application/x-tex">t0 中的值低6位置1后移动到</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">t</span><span class="mord">0</span><span class="mord cjk_fallback">中的值低</span><span class="mord">6</span><span class="mord cjk_fallback">位置</span><span class="mord">1</span><span class="mord cjk_fallback">后移动到</span></span></span></span>t1中</li>
-<li>寄存器a1清零</li>
-<li>寄存器a1的位5取反，其他不变</li>
-<li>交换两个寄存器<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mn>0</mn><mtext>和</mtext></mrow><annotation encoding="application/x-tex">s0和</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">s</span><span class="mord">0</span><span class="mord cjk_fallback">和</span></span></span></span>s1中内容的实现指令</li>
-</ol>
-<h3 id="更多指令相关练习">更多指令相关练习 </h3>
-<ol>
-<li>Syscall  1/4/5/8/10/11/12  常用汇编命令</li>
-<li>计算负数整除2，要求使用移位指令</li>
-<li>判断$t0中值的奇偶性</li>
-<li>宏指令abs rd, rs 的实现代码</li>
-<li>宏指令li  $t0, 0xffffefff 的实现代码</li>
-<li>宏指令div/divu  rd, rs, rt（取商）的实现代码</li>
-<li>宏指令rem/remu  rd, rs, rt（取余数）的实现代码</li>
-<li>循环右移宏指令ror  rd, rs, rt 的实现代码</li>
-<li>条件设置类宏指令sne  rd, rs, rt 的实现代码</li>
-<li>条件转移类宏指令ble/ bleu  rs, rt, Label 的实现代码</li>
-<li>条件转移类宏指令blt / bltu  rs, rt, Label 的实现代码</li>
-<li>判断两个寄存器<code>$s0</code>和`$s11中值符号是否相同的指令</li>
-</ol>
+<h2 id="算术运算类指令练习">算术运算类指令练习 </h2>
+<details>
+<summary><b>1. 计算表达式 10x + y</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code># 假设 x 在 $t0, y 在 $t1, 结果存入 $t2
+sll  $t2, $t0, 1         # $t2 = 2x
+sll  $t3, $t0, 3         # $t3 = 8x
+add  $t2, $t2, $t3       # $t2 = 10x
+add  $t2, $t2, $t1       # $t2 = 10x + y
+</code></pre><p>练习版:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>      .data
+msg1: .asciiz"Please input x:\n"
+msg2: .asciiz"Please input y:\n"
+msg3: .asciiz"The result is:\n"
+x:    .word 0 #必须赋初值
+y:    .word 0 #赋初值
+res:  .word 0 #赋初值
+      .text
+      li $v0,4
+      la $a0,msg1 #prompt
+      syscall
+      li $v0,5 #read x
+      syscall
+      sw $v0,x #Mem[x]=v0 
+      li $v0,4
+      la $a0,msg2 #prompt
+      syscall
+      li $v0,5 #read y
+      syscall
+      sw $v0,y #Mem[y]=v0
+      lw $t0,x #t0=x
+      lw $t1,y #t1=y
+      sll $t2,$t0,1 #t2=2x
+      sll $t3,$t2,2 #$t3=8x
+      add $t4,$t2,$t3 #t4=2x+8x=10x
+      add $t5,$t4,$t1 #t5=10x+y
+      sw $t5,res #Mem[res]=t5
+      li $v0,4
+      la $a0,msg3
+      syscall
+      li $v0,1
+      move $a0,$t5
+      syscall
+      li $v0,10
+      syscall
+</code></pre><blockquote>
+<p>10x = 2x + 8x，用移位代替乘法。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>2. 计算表达式 ax² + bx + c</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code># 假设 a在$t0, b在$t1, c在$t2, x在$t3, 结果存入$t4
+mult $t3, $t3            # x² → HI:LO
+mflo $t4                 # $t4 = x²
+mult $t0, $t4            # a × x²
+mflo $t4                 # $t4 = ax²
+mult $t1, $t3            # b × x
+mflo $t5                 # $t5 = bx
+add  $t4, $t4, $t5       # ax² + bx
+add  $t4, $t4, $t2       # ax² + bx + c
+</code></pre><p>练习版:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>      .data
+msg1: .asciiz "Please input x:\n" 
+msg2: .asciiz "Please input a:\n" 
+msg3: .asciiz "Please input b:\n" 
+msg4: .asciiz "Please input c:\n" 
+msg5: .asciiz "The result is:\n" 
+x:    .word 0
+a:    .word 0
+B:    .word 0 #不能用b 会跟b指令冲突
+c:    .word 0
+res:  .word 0
+      .text
+      li $v0,4 #prompt
+      la $a0,msg1
+      syscall
+      li $v0,5 #read x
+      syscall
+      sw $v0,x #Mem[x]=v0
+      li $v0,4 #prompt
+      la $a0,msg2
+      syscall
+      li $v0,5 #read a
+      syscall
+      sw $v0,a #Mem[a]=v0
+      li $v0,4 #prompt
+      la $a0,msg3
+      syscall
+      li $v0,5 #read b
+      syscall
+      sw $v0,B #Mem[b]=v0
+      li $v0,4 #prompt
+      la $a0,msg4
+      syscall
+      li $v0,5 #read c
+      syscall
+      sw $v0,c #Mem[c]=v0
+      lw $t0,x #t0=x
+      lw $t1,a #t1=a
+      lw $t2,B #t2=b
+      lw $t3,c #t3=c
+      mul $t4,$t0,$t0 #t4=x^2
+      mul $t5,$t1,$t4 #t5=ax^2
+      mul $t6,$t0,$t2 #t6=bx
+      add $t7,$t5,$t6 #t7=ax^2+bx
+      add $t8,$t7,$t3 #t8=ax^2+bx+c
+      sw $t8,res
+      li $v0,4 #prompt
+      la $a0,msg5
+      syscall
+      li $v0,1
+      move $a0,$t8 #a0=t8
+      syscall
+      li $v0,10
+      syscall
+
+</code></pre></details>
+<hr>
+<h2 id="逻辑运算类指令练习">逻辑运算类指令练习 </h2>
+<details>
+<summary><b>1. 寄存器$a1的位0和位15不变，其他清零</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>andi $a1, $a1, 0x8001    # 1000 0000 0000 0001
+</code></pre><blockquote>
+<p>与1不变，与0清零。只保留bit15和bit0。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>2. 取出寄存器$a0的低7位</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>andi $at, $a0, 0x007f    # 0000 0000 0111 1111
+</code></pre></details>
+<details>
+<summary><b>3. 将$t0中的值低6位清零后移动到$t1中</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>andi $t1, $t0, 0xffc0    # 1111 1111 1100 0000
+或
+andi $t0,$t0,0xffc0
+move $t1,$t0
+
+</code></pre><blockquote>
+<p>高26位与1不变，低6位与0清零。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>4. 寄存器$a1的位7和位31置1，其余不变</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>lui $t0,0x8000
+or $a1,$a1,$t0
+ori $a1,$a1,0x0080 #位7--右起第五位
+#所以是0x0080而不是0x0040
+
+或者
+li $t0,0x80000080 #同样的注意事项
+or $a1,$a1,$t0
+#有时候还要注意是低/高x位，还是就针对某一位(位x)
+
+
+</code></pre></details>
+<details>
+<summary><b>5. 将$t0中的值低6位置1后移动到$t1中</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>ori  $t1, $t0, 0x003f    # 0000 0000 0011 1111
+或者
+ori $t0,$t0,0x003f
+move $t1,$t0
+
+</code></pre><blockquote>
+<p>或1置1，或0不变。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>6. 寄存器$a1清零</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code># 方法1：异或自身（最常用）
+xor  $a1, $a1, $a1
+
+# 方法2：零加零
+add  $a1, $zero, $zero
+
+# 方法3：零或零
+or   $a1, $zero, $zero
+
+# 方法4：与零
+and  $a1,$a1,$zero
+</code></pre></details>
+<details>
+<summary><b>7. 寄存器$a1的位5取反，其他不变</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>xori $a1, $a1, 0x0020    # 0000 0000 0010 0000
+</code></pre><blockquote>
+<p>异或1取反，异或0不变。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>8. 交换两个寄存器$s0和$s1中内容的实现指令</b></summary>
+<p><strong>方法1：使用临时寄存器</strong></p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>move $at, $s0
+move $s0, $s1
+move $s1, $at
+</code></pre><p><strong>方法2：三步异或（无需额外寄存器）</strong></p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>xor  $s0, $s0, $s1
+xor  $s1, $s0, $s1
+xor  $s0, $s0, $s1
+</code></pre><p><strong>三步异或原理</strong>（A=<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mn>0</mn><mo separator="true">,</mo><mi>B</mi><mo>=</mo></mrow><annotation encoding="application/x-tex">s0, B=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">s</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span>s1）：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">步骤</th>
+<th style="text-align:left">操作</th>
+<th style="text-align:left">$s0</th>
+<th style="text-align:left">$s1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">初始</td>
+<td style="text-align:left">—</td>
+<td style="text-align:left">A</td>
+<td style="text-align:left">B</td>
+</tr>
+<tr>
+<td style="text-align:center">①</td>
+<td style="text-align:left">$s0 = A⊕B</td>
+<td style="text-align:left">A⊕B</td>
+<td style="text-align:left">B</td>
+</tr>
+<tr>
+<td style="text-align:center">②</td>
+<td style="text-align:left">$s1 = (A⊕B)⊕B = A</td>
+<td style="text-align:left">A⊕B</td>
+<td style="text-align:left">A</td>
+</tr>
+<tr>
+<td style="text-align:center">③</td>
+<td style="text-align:left">$s0 = (A⊕B)⊕A = B</td>
+<td style="text-align:left">B</td>
+<td style="text-align:left">A</td>
+</tr>
+</tbody>
+</table>
+<p>✅ 交换完成。<br>
+(异或运算具有交换律)</p>
+</details>
+<hr>
+<h2 id="更多指令相关练习">更多指令相关练习 </h2>
+<details>
+<summary><b>1. Syscall 1/4/5/8/10/11/12 常用汇编命令</b></summary>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">$v0</th>
+<th style="text-align:left">功能</th>
+<th style="text-align:left">参数</th>
+<th style="text-align:center">返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:left">print_int</td>
+<td style="text-align:left">$a0=整数</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:left">print_string</td>
+<td style="text-align:left">$a0=字符串地址</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:left">read_int</td>
+<td style="text-align:left">无</td>
+<td style="text-align:center">$v0=整数</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:left">read_string</td>
+<td style="text-align:left"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mn>0</mn><mo>=</mo><mtext>缓冲区</mtext><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">a0=缓冲区,</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">a</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord cjk_fallback">缓冲区</span><span class="mpunct">,</span></span></span></span>a1=长度</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:left">exit</td>
+<td style="text-align:left">无</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:left">print_char</td>
+<td style="text-align:left">$a0=ASCII码</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:left">read_char</td>
+<td style="text-align:left">无</td>
+<td style="text-align:center">$v0=ASCII码</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>1、5写读整数<br>
+4、8写读字符串<br>
+11、12写读字符<br>
+10退出</p>
+</blockquote>
+<p><strong>使用示例：</strong></p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code># 打印整数
+li $v0, 1
+li $a0, 100
+syscall
+
+# 读取整数
+li $v0, 5
+syscall
+move $t0, $v0
+</code></pre></details>
+<details>
+<summary><b>2. 计算负数整除2，要求使用移位指令</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>sra  $t0, $t0, 1          # 算术右移1位
+</code></pre><blockquote>
+<p><strong>必须用sra（算术右移）</strong>，不能srl（逻辑右移）。</p>
+<p>例：-5（0xFFFFFFFB）</p>
+<ul>
+<li>sra：得 -2 ✅ 正确</li>
+<li>srl：得 2147483645 ❌ 错误</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary><b>3. 判断$t0中值的奇偶性</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>andi $at, $t0, 1          # 取最低位
+beq  $at, $zero, even     # 最低位=0 → 偶数
+# 奇数
+b    done
+even:
+# 偶数
+done:
+</code></pre><blockquote>
+<p>bit0为0是偶数，为1是奇数。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>4. 宏指令abs rd, rs 的实现代码</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>addu rd, $zero, rs         # rd = rs
+bgez rs, 1f                # rs ≥ 0 则跳过
+sub  rd, $zero, rs         # rd = 0 - rs
+1:
+</code></pre></details>
+<details>
+<summary><b>5. 宏指令li $t0, 0xffffefff 的实现代码</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>lui $t0, 0xffff            # 高16位
+ori $t0, $t0, 0xefff       # 低16位
+# $t0 = 0xffffefff
+</code></pre></details>
+<details>
+<summary><b>6. 宏指令div/divu rd, rs, rt（取商）的实现代码</b></summary>
+<p><strong>div（有符号取商）：</strong></p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>bne  rt, $zero, ok
+break $zero                # 除零异常
+ok:
+div  rs, rt
+mflo rd
+</code></pre><p><strong>divu（无符号取商）：</strong></p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>bne  rt, $zero, ok
+break $zero
+ok:
+divu rs, rt
+mflo rd
+</code></pre></details>
+<details>
+<summary><b>7. 宏指令rem/remu rd, rs, rt（取余数）的实现代码</b></summary>
+<p><strong>rem（有符号取余）：</strong></p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>bne  rt, $zero, ok
+break $zero
+ok:
+div  rs, rt
+mfhi rd                    # ← 取HI而非LO
+</code></pre><p><strong>remu（无符号取余）：</strong></p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>bne  rt, $zero, ok
+break $zero
+ok:
+divu rs, rt
+mfhi rd
+</code></pre></details>
+<details>
+<summary><b>8. 循环右移宏指令ror rd, rs, rt 的实现代码</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>subu $at, $zero, rt        # $at = -rt，低5位 = 32-rt
+sllv $at, rs, $at         # 左移(32-rt)位
+srlv rd, rs, rt           # 右移rt位
+or   rd, rd, $at          # 合并
+</code></pre></details>
+<details>
+<summary><b>9. 条件设置类宏指令sne rd, rs, rt 的实现代码</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>beq  rt, rs, yes
+ori  rd, $zero, 1          # 不等 → rd=1
+beq  $zero, $zero, skip
+yes:
+ori  rd, $zero, 0          # 相等 → rd=0 不能忘了这一步
+skip:
+</code></pre><blockquote>
+<p>sne = Set if Not Equal，不等置1，相等置0。</p>
+</blockquote>
+</details>
+<details>
+<summary><b>10. 条件转移类宏指令ble/bleu rs, rt, Label 的实现代码</b></summary>
+<p><strong>ble（有符号 ≤）：</strong></p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>slt  $at, rt, rs           # rt &lt; rs ?
+beq  $at, $zero, Label     # NOT(rt&lt;rs) → rs≤rt → 跳转
+</code></pre><blockquote>
+<p>逻辑：rs ≤ rt 等价于 ¬(rt &lt; rs)</p>
+</blockquote>
+<p><strong>bleu（无符号 ≤）：</strong></p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>sltu $at, rt, rs
+beq  $at, $zero, Label
+</code></pre></details>
+<details>
+<summary><b>11. 条件转移类宏指令blt/bltu rs, rt, Label 的实现代码</b></summary>
+<p><strong>blt（有符号 &lt;）：</strong></p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>slt  $at, rs, rt           # rs &lt; rt ?
+bne  $at, $zero, Label     # 成立则跳转
+</code></pre><p><strong>bltu（无符号 &lt;）：</strong></p>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>sltu $at, rs, rt
+bne  $at, $zero, Label
+</code></pre></details>
+<details>
+<summary><b>12. 判断两个寄存器$s0和$s1中值符号是否相同的指令</b></summary>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>xor  $at, $s0, $s1         # 异或
+bltz $at, diff             # 最高位=1 → 符号不同
+# 符号相同
+b    done
+diff:
+# 符号不同
+done:
+</code></pre><p><strong>原理</strong>：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">$s0符号</th>
+<th style="text-align:center">$s1符号</th>
+<th style="text-align:center">异或最高位</th>
+<th style="text-align:left">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0（正）</td>
+<td style="text-align:center">0（正）</td>
+<td style="text-align:center">0</td>
+<td style="text-align:left">相同</td>
+</tr>
+<tr>
+<td style="text-align:center">0（正）</td>
+<td style="text-align:center">1（负）</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">不同</td>
+</tr>
+<tr>
+<td style="text-align:center">1（负）</td>
+<td style="text-align:center">0（正）</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">不同</td>
+</tr>
+<tr>
+<td style="text-align:center">1（负）</td>
+<td style="text-align:center">1（负）</td>
+<td style="text-align:center">0</td>
+<td style="text-align:left">相同</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>异或结果的最高位 = 符号是否不同：0相同，1不同。</p>
+</blockquote>
+<h1 id="判断两数符号是否相同--分支法汇总">判断两数符号是否相同 —— 分支法汇总 </h1>
+<h2 id="方法一异或法最简洁">方法一：异或法（最简洁） </h2>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>xor  $at, $s0, $s1         # 符号不同→最高位=1
+bltz $at, diff             # 最高位=1→不同
+# 符号相同
+b    done
+diff:
+# 符号不同
+done:
+</code></pre><hr>
+<h2 id="方法二相乘判符号">方法二：相乘判符号 </h2>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>mul  $at, $s0, $s1         # 同号得正，异号得负
+bltz $at, diff             # 结果为负→符号不同
+# 符号相同
+b    done
+diff:
+# 符号不同
+done:
+</code></pre><blockquote>
+<p>⚠️ 可能溢出，但最高位（符号位）依然正确。推荐用 <code>mulo</code> 或只用低32位。</p>
+</blockquote>
+<hr>
+<h2 id="方法三移位看最高位">方法三：移位看最高位 </h2>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>srl  $at, $s0, 31          # 取出 $s0 的符号位（0或1）
+srl  $t0, $s1, 31          # 取出 $s1 的符号位
+xor  $at, $at, $t0         # 相同→0，不同→1
+bnez $at, diff             # 不为0→符号不同
+# 符号相同
+b    done
+diff:
+# 符号不同
+done:
+</code></pre><hr>
+<h2 id="方法四分别与0比较纯分支">方法四：分别与0比较（纯分支） </h2>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>bltz $s0, s0_neg           # $s0 &lt; 0
+# $s0 &gt;= 0
+bltz $s1, diff             # $s0&gt;=0, $s1&lt;0 → 不同
+b    same                  # 都&gt;=0 → 相同
+s0_neg:
+bltz $s1, same             # 都&lt;0 → 相同
+b    diff                  # $s0&lt;0, $s1&gt;=0 → 不同
+same:
+# 符号相同
+b    done
+diff:
+# 符号不同
+done:
+</code></pre><hr>
+<h2 id="方法五减法判符号">方法五：减法判符号 </h2>
+<pre data-role="codeBlock" data-info="asm" class="language-asm asm"><code>sub  $at, $s0, $s1
+xor  $at, $at, $s0
+xor  $at, $at, $s1
+bltz $at, diff
+# 符号相同
+b    done
+diff:
+# 符号不同
+done:
+</code></pre><hr>
+<h2 id="总结">总结 </h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">核心思路</th>
+<th style="text-align:center">指令数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">异或法</td>
+<td style="text-align:left">符号位异或→看最高位</td>
+<td style="text-align:center">2条</td>
+</tr>
+<tr>
+<td style="text-align:left">相乘法</td>
+<td style="text-align:left">同号得正，异号得负</td>
+<td style="text-align:center">2条</td>
+</tr>
+<tr>
+<td style="text-align:left">移位法</td>
+<td style="text-align:left">各自取最高位再比较</td>
+<td style="text-align:center">4条</td>
+</tr>
+<tr>
+<td style="text-align:left">纯分支法</td>
+<td style="text-align:left">分四种情况判断</td>
+<td style="text-align:center">4~5条</td>
+</tr>
+<tr>
+<td style="text-align:left">减法法</td>
+<td style="text-align:left">减法+异或排除</td>
+<td style="text-align:center">4条</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>最终推荐</strong>：用 <code>xor + bltz</code>，两个指令搞定，最简洁。其他方法用于理解原理。</p>
+</blockquote>
+</details>
 <hr>
 <h1 id="注意点">注意点 </h1>
 <p><strong>MIPS指令集与易混淆点详解表</strong></p>
-<hr>
 <h1 id="mips-指令集与易混淆点详解表">MIPS 指令集与易混淆点详解表 </h1>
 <h2 id="一-存储指令寄存器--内存">一、存储指令（寄存器 → 内存） </h2>
 <table>
