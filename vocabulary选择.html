@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>78题词汇专项练习 (含错题本)</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .filter-area {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .filter-area select, .filter-area button {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            cursor: pointer;
+            background-color: #fff;
+        }
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            background: #e2e8f0;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .nav-btn.active {
+            background: #2980b9;
+            color: white;
+        }
+        .nav-btn:hover:not(.active) {
+            background: #d1d5db;
+        }
+        .stats {
+            font-weight: bold;
+            color: #2980b9;
+        }
+        #question-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .question-item {
+            background: #fafbfc;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.2s;
+        }
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        .q-sentence {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        .q-sentence u {
+            text-decoration: underline;
+            text-decoration-color: #e74c3c;
+            text-underline-offset: 3px;
+        }
+        .q-translation {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 12px;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+            background: #f0f8ff;
+            padding: 8px 10px;
+            border-radius: 4px;
+        }
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .options { grid-template-columns: 1fr; }
+        }
+        .option-btn {
+            padding: 12px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: #fff;
+            cursor: pointer;
+            text-align: left;
+            font-size: 15px;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .option-btn:hover:not(.disabled) {
+            background: #f0f4f8;
+            border-color: #a0aec0;
+        }
+        .option-btn.correct {
+            background: #d4edda !important;
+            border-color: #28a745 !important;
+            color: #155724;
+        }
+        .option-btn.wrong {
+            background: #f8d7da !important;
+            border-color: #dc3545 !important;
+            color: #721c24;
+        }
+        .option-btn.disabled {
+            cursor: not-allowed;
+            opacity: 0.9;
+        }
+        .option-btn .opt-mean {
+            color: #666;
+            font-size: 0.85em;
+            margin-left: 8px;
+        }
+        .option-btn.correct .opt-mean { color: #155724; }
+        .option-btn.wrong .opt-mean { color: #721c24; }
+        
+        .unit-tag {
+            background: #e2e8f0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status-badge {
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .status-badge.passed { color: #28a745; }
+        .status-badge.failed { color: #dc3545; }
+        .status-badge.pending { color: #6c757d; }
+        
+        .empty-wrong {
+            text-align: center;
+            color: #6c757d;
+            padding: 40px 0;
+            font-size: 18px;
+        }
+        .action-btn {
+            padding: 4px 10px;
+            font-size: 13px;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .action-btn:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📚 词汇选择专项练习 (78题)</h1>
+    <div class="controls">
+        <div class="filter-area">
+            <select id="unit-filter">
+                <option value="all">全部单元 (78题)</option>
+                <option value="1">Unit 1 (1-10)</option>
+                <option value="2">Unit 2 (1-10)</option>
+                <option value="3">Unit 3 (1-10)</option>
+                <option value="4">Unit 4 (1-10)</option>
+                <option value="5">Unit 5 (1-10)</option>
+                <option value="6">Unit 6 (1-8)</option>
+                <option value="7">Unit 7 (1-10)</option>
+                <option value="8">Unit 8 (1-10)</option>
+            </select>
+            
+            <button id="btn-all" class="nav-btn active" onclick="switchMode('all')">📖 全部练习</button>
+            <button id="btn-wrong" class="nav-btn" onclick="switchMode('wrong')">❌ 错题本 (<span id="wrong-count">0</span>)</button>
+        </div>
+        <div class="stats">
+            已做：<span id="completed-count">0</span> / <span id="total-count">78</span> 题， 
+            正确：<span id="correct-count">0</span> 题
+            <button id="reset-btn" class="action-btn" onclick="resetWrongBook()">清空错题本</button>
+        </div>
+    </div>
+    <div id="question-list"></div>
+</div>
+
+<script>
+    const questions = [
+        // Unit 1
+        { id: 1, unit: 1, sentence: 'With liquidity <u>coursing through</u> the leveraged finance market, financing costs are falling while debt multiples are rising.', translation: '随着流动性涌入杠杆金融市场，融资成本下降，债务倍数上升。', options: ['passing along', 'deriving from', 'turning out', 'wrapping up'], options_meaning: ['传递', '源自', '结果是', '结束'], answer: 0 },
+        { id: 2, unit: 1, sentence: 'The building was quickly <u>engulfed</u> in flames as a powerful blast swept through the city streets, blowing out its windows and strewing debris everywhere.', translation: '一场强烈爆炸席卷城市街道，大楼迅速被火焰吞没，窗户被炸飞，碎片散落四处。', options: ['drained', 'devoured', 'discharged', 'devolved'], options_meaning: ['排干', '吞没', '排出', '移交'], answer: 1 },
+        { id: 3, unit: 1, sentence: 'The USA should actively assist other countries to meet their challenges, <u>marshalling</u> its experience and technological prowess.', translation: '美国应积极协助他国应对挑战，调动其经验和技术实力。', options: ['bragging', 'deploying', 'delaying', 'displaying'], options_meaning: ['吹嘘', '调动', '推迟', '展示'], answer: 1 },
+        { id: 4, unit: 1, sentence: 'Inflation has risen by an <u>incomprehensible</u> 200 percent in the past 12 months, and the commercial consequences are outright dystopian.', translation: '过去12个月通胀飙升了令人难以置信的200%，商业后果完全反乌托邦。', options: ['incredible', 'frightening', 'ridiculous', 'thrilling'], options_meaning: ['难以置信的', '令人恐惧的', '荒谬的', '令人兴奋的'], answer: 0 },
+        { id: 5, unit: 1, sentence: 'Officially, this national holiday <u>marks</u> the anniversary of the First Fleet of British settlers arriving in New South Wales in 1788.', translation: '官方意义上，这个全国性节日标志着1788年英国“第一舰队”抵达新南威尔士州的纪念日。', options: ['celebrates', 'signifies', 'ranks', 'states'], options_meaning: ['庆祝', '标志着', '排名', '陈述'], answer: 0 },
+        { id: 6, unit: 1, sentence: 'This game always seemed too much like war, <u>vicious</u> old men manipulating youngsters hungry for fame into performing heroic acts for short change.', translation: '这个游戏总像战争，邪恶的老家伙操纵渴望成名的年轻人，为微薄报酬表演英雄行为。', options: ['benign', 'challenging', 'dynamic', 'malicious'], options_meaning: ['良性的', '挑战性的', '动态的', '恶意的'], answer: 3 },
+        { id: 7, unit: 1, sentence: 'The government has <u>dismissed</u> criticisms that the country\'s health policy is a mess.', translation: '政府驳斥了国家医疗政策一团糟的批评。', options: ['accepted', 'refused', 'adjusted', 'fought'], options_meaning: ['接受', '驳回/拒绝', '调整', '抗争'], answer: 1 },
+        { id: 8, unit: 1, sentence: 'And that\'s where the true danger lies; in a prestige game between two nuclear powers led by <u>imprudent</u> leaders.', translation: '真正危险在于：两个由轻率领导人领导的核大国之间的声望博弈。', options: ['advisable', 'discreet', 'judicious', 'tactless'], options_meaning: ['明智的', '谨慎的', '明智的', '不得体的'], answer: 3 },
+        { id: 9, unit: 1, sentence: 'The callous unilateral policy toward people is not only <u>reprehensible</u> but also antithetical to our nation\'s values.', translation: '冷酷的单边政策不仅应受谴责，也与国家价值观背道而驰。', options: ['blameless', 'irreproachable', 'censurable', 'impeccable'], options_meaning: ['无可指责的', '无可非议的', '应受谴责的', '完美的'], answer: 2 },
+        { id: 10, unit: 1, sentence: 'In the write-up of their decision—reaffirming that the post should stay up—the board members exposed how this seemingly <u>trivial</u>, fixable mistake was a window into a deeper failure.', translation: '董事会成员揭示了看似琐碎的错误是如何成为深入了解更深层次失败的窗口。', options: ['frivolous', 'eventful', 'material', 'momentous'], options_meaning: ['琐碎的', '多事的', '重要的', '重大的'], answer: 0 },
+        
+        // Unit 2
+        { id: 11, unit: 2, sentence: 'The surge led the Federal Reserve to aggressively raise interest rates to beat back inflation in a campaign that threatens to <u>topple</u> the nation into recession this year.', translation: '激增迫使美联储激进加息，威胁今年使该国陷入衰退。', options: ['tumble', 'scrabble', 'upside', 'tickle'], options_meaning: ['暴跌', '争夺', '上行的一面', '使发痒'], answer: 0 },
+        { id: 12, unit: 2, sentence: 'The New College is a top-notch liberal arts school, as well as a politically liberal <u>enclave</u> not just in deeply red Florida, but in the county where it is located, too.', translation: '新学院是顶尖文理学院，也是政治上的自由派飞地。', options: ['cave', 'territory', 'closure', 'encase'], options_meaning: ['洞穴', '领土', '关闭', '包裹'], answer: 1 },
+        { id: 13, unit: 2, sentence: 'The project was based on an assumption the clean electricity generated from wind would annually <u>displace</u> an average of 129,000 tons of CO₂ by reducing reliance on fossil fuels.', translation: '项目假设风电每年将取代平均12.9万吨二氧化碳排放。', options: ['replace', 'leave', 'prevent', 'dislocate'], options_meaning: ['取代', '离开', '阻止', '扰乱'], answer: 0 },
+        { id: 14, unit: 2, sentence: 'The president of the American Chamber of Commerce warned the epidemic controls would <u>hamper</u> foreign investment in the country for years to come.', translation: '商会主席警告防疫管控将在未来数年阻碍外国投资。', options: ['hammer', 'cluster', 'consume', 'impede'], options_meaning: ['锤击', '聚集', '消耗', '阻碍'], answer: 3 },
+        { id: 15, unit: 2, sentence: 'Fans can be fickle, and social media platforms can <u>bombard</u> users with channels more focused on selling products than telling a good story.', translation: '粉丝善变，社交媒体平台用推销产品的频道轰炸用户。', options: ['explode', 'feed', 'attack', 'charge'], options_meaning: ['爆炸', '喂养/喂送', '攻击', '充电/收费'], answer: 1 },
+        { id: 16, unit: 2, sentence: 'Underground businesses <u>deploy</u> lookouts at city storage yards and readily replace expensive equipment in human trafficking operations.', translation: '地下企业在城市仓储场部署望风人员，随时更换人口贩卖设备。', options: ['decoy', 'placate', 'station', 'employ'], options_meaning: ['诱饵', '安抚', '安置/驻扎', '雇佣'], answer: 2 },
+        { id: 17, unit: 2, sentence: 'The recent unrest has proved to be the worst violence in Peru since the 1990s when the country saw clashes between the state and <u>rebel</u> group Shining Path.', translation: '近期动荡是秘鲁自90年代以来最严重暴力事件，当时政府与叛乱组织“光辉道路”冲突。', options: ['insurgent', 'patriot', 'corps', 'advocate'], options_meaning: ['叛乱者', '爱国者', '军团', '倡导者'], answer: 0 },
+        { id: 18, unit: 2, sentence: 'Today, members of Congress and rising Republican stars are the ones who <u>terrorize</u> people who does not follow their doctrines.', translation: '如今国会议员们恐吓不遵从他们信条的人。', options: ['smuggle', 'threaten', 'abuse', 'berate'], options_meaning: ['走私', '威胁', '虐待', '严厉指责'], answer: 1 },
+        { id: 19, unit: 2, sentence: 'The infrastructure spending will not <u>jolt</u> the American economy like a traditional economic stimulus plan, nor is it meant to.', translation: '基础设施支出不会像传统刺激计划那样冲击美国经济。', options: ['revive', 'joint', 'shock', 'revolve'], options_meaning: ['复兴', '关节/联合', '冲击', '旋转'], answer: 2 },
+        { id: 20, unit: 2, sentence: 'The cold air will allow for a major winter storm to develop bringing significant impacts to the US which could <u>wreck</u> any holiday travel plans this week.', translation: '冷空气将形成大雪暴，可能破坏本周所有假期出行计划。', options: ['rick', 'wright', 'ruin', 'wreak'], options_meaning: ['堆垛', '制造者', '毁灭', '造成'], answer: 2 },
+        
+        // Unit 3
+        { id: 21, unit: 3, sentence: 'The suspect was <u>on the verge of</u> confessing when the officers realized that he hadn\'t been read his rights.', translation: '嫌疑人即将招供时，警察意识到他还没被告知权利。', options: ['close to', 'experiencing', 'going through', 'far from'], options_meaning: ['接近', '经历', '经受', '远离'], answer: 0 },
+        { id: 22, unit: 3, sentence: 'Though most cases are said to appear within about 8 days, medical literature indicates that the monkeypox virus can <u>incubate</u> in the body for up to 21 days before symptoms appear.', translation: '猴痘病毒可在体内潜伏长达21天才会出现症状。', options: ['complete', 'develop', 'design', 'consider'], options_meaning: ['完成', '发展/潜伏', '设计', '考虑'], answer: 1 },
+        { id: 23, unit: 3, sentence: 'Some views inevitably temper any <u>propensity</u> European leaders may have to act against the Islamic republic.', translation: '有些观点会缓和欧洲领导人可能采取行动的倾向。', options: ['tendency', 'reason', 'prosperity', 'density'], options_meaning: ['倾向', '理由', '繁荣', '密度'], answer: 0 },
+        { id: 24, unit: 3, sentence: 'Republicans hope to win votes by highlighting areas where Democratic <u>orthodoxy</u> strikes most Americans as unfair.', translation: '共和党人希望突显民主党正统观念来赢得选票。', options: ['tradition', 'authority', 'contradict', 'legitimacy'], options_meaning: ['传统', '权威', '矛盾', '合法性'], answer: 3 },
+        { id: 25, unit: 3, sentence: '<u>Bombastic</u> headlines over the past several months have done nothing less than smear this process.', translation: '过去数月浮夸的头条新闻简直是在诋毁这一进程。', options: ['impressive', 'sensational', 'fantastic', 'irrational'], options_meaning: ['令人印象深刻的', '耸人听闻的', '极好的', '不合理的'], answer: 1 },
+        { id: 26, unit: 3, sentence: 'The company hopes the introduction of six new models will <u>spur</u> additional demand.', translation: '公司希望推出六款新车型能刺激额外需求。', options: ['lower', 'stimulate', 'restrict', 'change'], options_meaning: ['降低', '刺激', '限制', '改变'], answer: 1 },
+        { id: 27, unit: 3, sentence: 'Issues such as fear, ignorance, superstition and cultural biases drive action in ways that <u>defy</u> logic.', translation: '恐惧、无知、迷信等以违背逻辑的方式驱使人们行动。', options: ['confront', 'escape', 'conceal', 'twist'], options_meaning: ['面对', '逃避', '隐藏', '扭曲'], answer: 0 },
+        { id: 28, unit: 3, sentence: 'Some politicians worry that giving voters a direct say in police affairs will lead to <u>demagogic</u> behaviours in the justice system.', translation: '政治家担心选民直接参与警务会引发司法中的煽动行为。', options: ['unrealistic', 'contagious', 'inflammatory', 'prejudicial'], options_meaning: ['不切实际的', '传染性的', '煽动性的', '有偏见的'], answer: 2 },
+        { id: 29, unit: 3, sentence: 'Despite its oil wealth, Saudi Arabia appears <u>devoid </u>of infrastructure apart from its oil industry.', translation: '沙特除石油工业外似乎缺乏基础设施。', options: ['absence', 'denial', 'limit', 'misuse'], options_meaning: ['缺失/缺乏', '否认', '限制', '滥用'], answer: 0 },
+        { id: 30, unit: 3, sentence: 'Economists admit that there is no <u>discernible</u> relationship between trade deficits and employment.', translation: '经济学家承认贸易逆差与就业之间没有明显关系。', options: ['apparent', 'meticulous', 'discreet', 'recognizable'], options_meaning: ['明显的', '细致的', '谨慎的', '可识别的'], answer: 3 },
+        
+        // Unit 4
+        { id: 31, unit: 4, sentence: 'Lebanon says the new treaty violated the ceasefire, and is threatening to stop <u>deploying</u> its army to the south.', translation: '黎巴嫩表示新条约违反停火，威胁停止向南部部署军队。', options: ['employing', 'arranging', 'imploring', 'decaying'], options_meaning: ['雇用', '安排/部署', '恳求', '腐烂/衰退'], answer: 1 },
+        // ⚠️ 修改了第32题答案 (原本为0，现改为3，对应选项 D crumble)
+        { id: 32, unit: 4, sentence: 'The councilman is seeking a solution to a budget crisis but making a partisan move to <u>cripple</u> an important element of the Democratic Party\'s base.', translation: '议员正寻求预算危机方案，却采取党派举动削弱民主党基本盘。', options: ['compromise', 'stable', 'ripple', 'crumble'], options_meaning: ['妥协', '稳定的', '涟漪', '崩溃'], answer: 3 },
+        { id: 33, unit: 4, sentence: 'The view that Europe has to take more financial responsibility for its own defense is now widespread, urgently <u>ratcheting up</u> the pressure to better unify Europe\'s defenses.', translation: '欧洲需承担更多防务费用的观点普遍存在，加剧了统一防务的压力。', options: ['hatching up', 'withdrawing', 'increasing', 'shifting'], options_meaning: ['策划', '撤回', '增加', '转移'], answer: 2 },
+        { id: 34, unit: 4, sentence: 'When in late 1941, US President Franklin Roosevelt sought to push Japan into the war by imposing an <u>embargo</u> of oil and scrap metal on Japan.', translation: '罗斯福试图通过对日本实施石油和废金属禁运来将其推入战争。', options: ['prohibition', 'sanction', 'permission', 'admission'], options_meaning: ['禁止/禁运', '制裁', '允许', '准许进入'], answer: 0 },
+        { id: 35, unit: 4, sentence: 'The <u>seductive</u> power of advertising is to let you think that a new product can solve your problems at a stroke.', translation: '广告的诱惑力在于让你认为新产品能立刻解决所有问题。', options: ['imaginative', 'unavoidable', 'tempting', 'absurd'], options_meaning: ['富有想象力的', '不可避免的', '诱人的', '荒谬的'], answer: 2 },
+        { id: 36, unit: 4, sentence: 'The integrity, <u>legitimacy</u>, survival and effectiveness of the United Nations depend on all the countries in this organization.', translation: '联合国的完整性（正直）依赖其所有成员国。', options: ['priority', 'honesty', 'intellect', 'authenticity'], options_meaning: ['优先权', '诚实', '智力', '真实性'], answer: 3 },
+        { id: 37, unit: 4, sentence: 'In countries with state power firms, like Russia, the government can stump up the money or use its <u>clout</u> to reduce borrowing costs.', translation: '在拥有国企的国家，政府可利用自身影响力来降低借贷成本。', options: ['influence', 'law', 'fund', 'trust'], options_meaning: ['影响力', '法律', '资金', '信托'], answer: 0 },
+        { id: 38, unit: 4, sentence: 'This new policy will draw numerous players back to property and will <u>underpin</u> our property markets.', translation: '新政策将吸引玩家重返楼市，支撑我们的房地产市场。', options: ['undermine', 'strengthen', 'expand', 'shrink'], options_meaning: ['削弱', '加强', '扩张', '萎缩'], answer: 1 },
+        { id: 39, unit: 4, sentence: 'The story of road construction is one of pioneering engineering <u>prowess</u> in the harshest environments on earth.', translation: '道路建设的故事，是地球上最恶劣环境中开创性工程实力的故事。', options: ['technique', 'power', 'plowing', 'knowledge'], options_meaning: ['技术', '实力', '耕作', '知识'], answer: 0 },
+        { id: 40, unit: 4, sentence: 'Colonists in 18th century often <u>rigged</u> the game in other ways, enjoying privileged access to land and permits.', translation: '18世纪殖民者通过其他方式操纵局面，享有特权。', options: ['competed in', 'cheated in', 'ripped', 'tagged'], options_meaning: ['参加...比赛', '在...作弊/操纵', '撕扯', '贴上标签'], answer: 1 },
+        
+        // Unit 5
+        { id: 41, unit: 5, sentence: 'Trump, twice impeached and now facing several civil and criminal investigations, used an hour-long speech to offer a familiar <u>refrain</u> of attacks on his challengers and grievances about his electoral defeat.', translation: '特朗普照例重复了对挑战者的攻击和对选举失利的抱怨。', options: ['complaint', 'chorus', 'denial', 'joke'], options_meaning: ['抱怨', '合唱/老调', '否认', '玩笑'], answer: 0 },
+        { id: 42, unit: 5, sentence: 'The city\'s contribution will come from tax-increment financing, in which property taxes are funneled back into redevelopment to help <u>revitalize</u> blighted property.', translation: '税收增量融资将房产税投入再开发，振兴荒废的房产。', options: ['revise', 'regenerate', 'reshape', 'reserve'], options_meaning: ['修订', '复兴', '重塑', '保留'], answer: 1 },
+        { id: 43, unit: 5, sentence: 'Some on the panel appeared <u>skeptical</u>, questioning whether the law explicitly gave victims\' family members a right to speak at proceedings to vacate convictions, let alone to play a more active role.', translation: '小组中一些人显得怀疑，质疑法律是否赋予受害者家属发言权。', options: ['cautious', 'assertive', 'doubtful', 'curious'], options_meaning: ['谨慎的', '坚定的', '怀疑的', '好奇的'], answer: 2 },
+        { id: 44, unit: 5, sentence: 'The World Bank warned earlier this month that any fresh shock would likely <u>unleash</u> the second downturn this decade.', translation: '世行警告任何新冲击都可能引发这十年的第二次衰退。', options: ['confine', 'release', 'magnify', 'remove'], options_meaning: ['限制', '释放/引发', '放大', '移除'], answer: 1 },
+        { id: 45, unit: 5, sentence: 'The push to <u>recruit</u> even more technology experts highlights concerns about how companies may use data and algorithms to target consumers with highly personalized offers, recommendations and information.', translation: '招募技术专家的举措突显了企业对消费者进行精准营销的担忧。', options: ['hire', 'refuse', 'fire', 'seek'], options_meaning: ['雇用/招募', '拒绝', '解雇', '寻找'], answer: 0 },
+        { id: 46, unit: 5, sentence: 'If television has irreparably poisoned and cheapened national politics, the televising of the Jan. 6 hearings may help <u>vindicate</u> the ubiquitous role that screens and images play in our lives.', translation: '1月6日听证会的转播有助于证实屏幕在生活中的普遍作用。', options: ['revenge', 'confirm', 'oppose', 'construct'], options_meaning: ['复仇', '证实', '反对', '构建'], answer: 1 },
+        { id: 47, unit: 5, sentence: 'The <u>upshot</u> is that there are not enough workers to fill all the available jobs, a situation made worse by the decline in legal immigration.', translation: '结果是没有足够工人填补职位空缺，合法移民减少加剧了情况。', options: ['upside', 'uplift', 'opportunity', 'consequence'], options_meaning: ['优势', '提升', '机会', '结果'], answer: 3 },
+        { id: 48, unit: 5, sentence: 'Founder of RegTech empowers organizations to proactively mitigate <u>regulatory</u> risk in consumer interaction channels.', translation: 'RegTech创始人赋权组织主动减轻消费者渠道中的监管风险。', options: ['supervising', 'reminding', 'judicious', 'juristic'], options_meaning: ['监督的', '提醒的', '明智的', '法律的'], answer: 0 },
+        { id: 49, unit: 5, sentence: 'Medications should eventually <u>offset</u> costs by preventing heart attacks, joint surgeries and other expensive therapies.', translation: '药物应通过预防心脏病等来抵消治疗成本。', options: ['cause', 'cancel', 'compensate', 'produce'], options_meaning: ['引起', '取消', '补偿/抵消', '产生'], answer: 2 },
+        { id: 50, unit: 5, sentence: 'This term is used to describe someone with dark traits similar to a narcissist, which refers to people with a <u>grandiose</u> sense of self who often dismisses others\' feelings.', translation: '此词指具有自大感并常忽视他人感受的人。', options: ['sober', 'modest', 'humble', 'magnificent'], options_meaning: ['清醒的', '谦虚的', '谦逊的', '壮丽的/自负的'], answer: 3 },
+        
+        // Unit 6
+        { id: 51, unit: 6, sentence: 'The general <u>truism</u> is that Africans are the most diverse population in the world, but some of the South Indian groups are very diverse indeed.', translation: '普遍的公认是非洲人最多样化，但南印度也极多样。', options: ['altruism', 'truth', 'racism', 'elitism'], options_meaning: ['利他主义', '真理', '种族主义', '精英主义'], answer: 1 },
+        { id: 52, unit: 6, sentence: 'There\'s no doubt that the world will continue to develop a <u>rapacious</u> need for the minerals required to produce cellphone and electric car batteries, among many other things.', translation: '世界将继续对生产电池等所需的矿产产生贪婪的需求。', options: ['greedy', 'moderate', 'vicious', 'rampant'], options_meaning: ['贪婪的', '适度的', '恶毒的', '猖獗的'], answer: 0 },
+        { id: 53, unit: 6, sentence: 'The president seized on the impromptu moment, urging Republicans and Democrats alike to <u>pledge</u> to avoid cuts to the income and health insurance programs.', translation: '总统敦促两党承诺避免削减收入和医保项目。', options: ['promise', 'strive', 'intend', 'ought'], options_meaning: ['承诺', '努力', '打算', '应该'], answer: 0 },
+        { id: 54, unit: 6, sentence: 'The committee\'s findings do not <u>fault</u> the intelligence community or law enforcement for the security failures of Jan. 6, something Republicans are likely to criticize.', translation: '委员会的调查结果未指责1月6日的情报和执法失误。', options: ['vouch', 'vault', 'misuse', 'mistake'], options_meaning: ['担保', '跃过', '滥用', '弄错'], answer: 3 },
+        { id: 55, unit: 6, sentence: 'Finally, the bill would clarify that the vice president has no power to <u>decree</u> whether electors will be counted.', translation: '法案明确副总统无权下令是否计入选举人票。', options: ['mandate', 'agree', 'disagree', 'discreet'], options_meaning: ['命令', '同意', '不同意', '谨慎的'], answer: 0 },
+        { id: 56, unit: 6, sentence: 'House Democrats continued to warn of the dangers of having an <u>impotent</u> branch of government, placing the blame squarely at the feet of the Republican Party.', translation: '众议院民主党警告政府中有无能分支的危险。', options: ['important', 'omnipotent', 'influential', 'unfruitful'], options_meaning: ['重要的', '全能的', '有影响力的', '无效的/无能的'], answer: 3 },
+        { id: 57, unit: 6, sentence: 'The crypto industry is highly <u>susceptible to</u> outside economic shocks like the pandemic and sudden Fed hikes.', translation: '加密货币行业极易受到外部经济冲击影响。', options: ['suspicious', 'vulnerable', 'acceptable', 'spendable'], options_meaning: ['可疑的', '脆弱的', '可接受的', '可花费的'], answer: 1 },
+        { id: 58, unit: 6, sentence: 'This kind of <u>rigorous</u> planning not only prevents day-of chaos, but also ensures that the prep work on the lead-up days is manageable.', translation: '这种严格的规划能防止当天混乱，确保前期准备可控。', options: ['robust', 'vigorous', 'strict', 'rigged'], options_meaning: ['稳健的', '精力充沛的', '严格的', '被操纵的'], answer: 2 },
+        
+        // Unit 7
+        { id: 59, unit: 7, sentence: 'The most popular and interesting stories of the day, from politics to opinions to world news, <u>curated</u> by our newsletter editors to keep you in the know.', translation: '每日最热门故事由编辑精心挑选，让您掌握动态。', options: ['selected', 'written', 'supported', 'marked'], options_meaning: ['挑选', '撰写', '支持', '标记'], answer: 0 },
+        { id: 60, unit: 7, sentence: 'Analysts and investors viewed the election as indicating <u>continuity</u> in the country\'s foreign and economic policies.', translation: '分析师认为选举表明该国政策具有延续性。', options: ['determination', 'continuation', 'conformity', 'convenience'], options_meaning: ['决心', '继续/延续', '一致', '便利'], answer: 1 },
+        { id: 61, unit: 7, sentence: 'That October, Kyiv was getting hit with regular air strikes; Zamchenko was <u>conscientious</u> about always leaving the store during an air-raid alert.', translation: '扎姆琴科非常谨慎，总在空袭时离开商店。', options: ['condescending', 'conspicuous', 'conscious', 'scrupulous'], options_meaning: ['傲慢的', '显眼的', '有意识的', '小心翼翼的'], answer: 3 },
+        { id: 62, unit: 7, sentence: 'Trump appears to have held on to documents on purpose; Biden\'s aides say his mistakes were <u>inadvertent</u>.', translation: '拜登助手称他的错误是无意/疏忽造成的。', options: ['inevitable', 'advertent', 'unintentional', 'adventurous'], options_meaning: ['不可避免的', '故意的', '非故意的', '冒险的'], answer: 2 },
+        { id: 63, unit: 7, sentence: 'The new rules <u>conform</u> to other changes in the Catholic Church\'s handling of abuse that have been issued since then.', translation: '新规则符合天主教会此后发布的处理虐童的变革。', options: ['oppose', 'accord', 'revised', 'adjusted'], options_meaning: ['反对', '一致/符合', '修订', '调整'], answer: 1 },
+        { id: 64, unit: 7, sentence: 'Other researchers could not <u>replicate</u> the results and complained that the study\'s recipe was vague and incomplete.', translation: '其他研究人员无法复制这些结果。', options: ['plicate', 'copy', 'reply', 'dedicate'], options_meaning: ['折叠', '复制', '回复', '奉献'], answer: 1 },
+        { id: 65, unit: 7, sentence: 'Oil prices are falling as stress in the banking industry raises concerns of an economic slowdown that would <u>curb</u> energy demand.', translation: '银行业压力引发经济放缓担忧（将抑制能源需求）。', options: ['pause', 'encourage', 'constrain', 'change'], options_meaning: ['暂停', '鼓励', '抑制', '改变'], answer: 2 },
+        { id: 66, unit: 7, sentence: '<u>Prosocial</u> behavior is a form of positive psychology that focuses on how people help each other out and do things for the greater good.', translation: '亲社会行为是积极心理学形式，关注互助和公共利益。', options: ['Friendly', 'Intimate', 'Social', 'Cunning'], options_meaning: ['友好的', '亲密的', '社会的', '狡猾的'], answer: 0 },
+        { id: 67, unit: 7, sentence: 'He was widely regarded as a skillful negotiator whose unflappable demeanor masked intense preparation and uncanny <u>intuition</u> about the promise of many young players.', translation: '他因对年轻球员有惊人的直觉而被认可。', options: ['tactic', 'tuition', 'ambition', 'hunch'], options_meaning: ['策略', '学费', '雄心', '直觉'], answer: 3 },
+        { id: 68, unit: 7, sentence: 'And as a result, what was already an <u>intriguing</u> subplot to camp is taking on even more meaning, thrusting the quartet into an increasingly bright spotlight.', translation: '原本引人入胜的营地副线现在意义更深了。', options: ['conspiring', 'scheming', 'fantastic', 'inspiring'], options_meaning: ['密谋的', '计划的', '极好的', '鼓舞人心的'], answer: 2 },
+        
+        // Unit 8
+        { id: 69, unit: 8, sentence: 'With presidential elections planned next year and the opposition\'s parallel government having recently <u>disbanded</u>, Mr. Maduro seems increasingly confident about his political future.', translation: '反对派平行政府解散，马杜罗对政治前途更自信。', options: ['dismissed', 'displayed', 'distended', 'disclosed'], options_meaning: ['解散', '展示', '膨胀', '披露'], answer: 0 },
+        { id: 70, unit: 8, sentence: 'Arizona\'s most populous county, Maricopa, which includes Phoenix, was a <u>nexus</u> of efforts to overturn the 2020 election.', translation: '马里科帕县是推翻2020年大选行动的核心。', options: ['network', 'connection', 'nougat', 'nugget'], options_meaning: ['网络', '连接', '牛轧糖', '金块'], answer: 1 },
+        { id: 71, unit: 8, sentence: 'The desert often draws searchers, <u>nomadic</u> types, people looking to get lost for a bit in all of the immensity—or, conversely, to find themselves.', translation: '沙漠吸引探索者和游牧类型的人。', options: ['noted', 'noted', 'ambulant', 'normal'], options_meaning: ['著名的', '著名的', '走动的/流动的', '正常的'], answer: 2 },
+        { id: 72, unit: 8, sentence: 'Those include proposals to <u>outlaw</u> electronic voting machines, prohibit polling places on higher education campuses and the creation of a state election police force.', translation: '提案包括取缔电子投票机等。', options: ['legalize', 'illegalize', 'outpoll', 'overturn'], options_meaning: ['使合法化', '使非法化', '得票超过', '推翻'], answer: 1 },
+        { id: 73, unit: 8, sentence: 'Democrats and Republicans in New Hampshire have warned that if Biden skips the state\'s <u>unsanctioned</u> primary and a rival wins it, that outcome could prove embarrassing for the sitting president.', translation: '跳过该州未经批准的初选可能让现任总统难堪。', options: ['unauthorized', 'unhealthy', 'unhygienic', 'uncertain'], options_meaning: ['未经批准的', '不健康的', '不卫生的', '不确定的'], answer: 0 },
+        { id: 74, unit: 8, sentence: 'Building an international network of <u>humane</u> societies and related groups has allowed the Helen Woodward center to become close to organizations providing relief to animal shelters in crisis during the war in Ukraine.', translation: '建立仁慈的动物保护网络，帮助乌克兰危机中的收容所。', options: ['systematic', 'nonhuman', 'passionate', 'compassionate'], options_meaning: ['系统性的', '非人类的', '热情的', '慈悲的'], answer: 3 },
+        { id: 75, unit: 8, sentence: 'At least a dozen would also require schools to alert parents of gender identity changes in most circumstances, which trans students say would <u>strip</u> them of their privacy and autonomy.', translation: '跨性别学生称此举会剥夺他们的隐私和自主权。', options: ['slice', 'slay', 'deprive', 'steal'], options_meaning: ['切片', '杀害', '剥夺', '偷窃'], answer: 2 },
+        { id: 76, unit: 8, sentence: 'Under Oregon\'s system, an urban growth boundary <u>designates</u> where a city expects to grow over the next 20 years.', translation: '城市增长边界指定了未来20年预期的发展区域。', options: ['appoints', 'designs', 'dedicates', 'detonates'], options_meaning: ['任命/指派', '设计', '奉献', '引爆'], answer: 0 },
+        { id: 77, unit: 8, sentence: 'The United States has pushed analysts to ask a fundamental question: What long-term effects will <u>polarized</u> politics have on the United States\' democracy?', translation: '两极分化的政治会对民主产生什么影响？', options: ['mediocre', 'centralized', 'intermediate', 'moderate'], options_meaning: ['平庸的', '中央集权的', '中间的', '温和的'], answer: 1 },
+        { id: 78, unit: 8, sentence: 'However, like most things between Ukraine and Russia, the details of the extension were <u>fraught</u> and tension-filled.', translation: '延期细节充满紧张和冲突。', options: ['fraud', 'frail', 'fright', 'distressed'], options_meaning: ['欺诈', '脆弱的', '惊吓', '焦虑的'], answer: 3 }
+    ];
+
+    // DOM & 状态
+    const container = document.getElementById('question-list');
+    const filter = document.getElementById('unit-filter');
+    const totalSpan = document.getElementById('total-count');
+    const completedSpan = document.getElementById('completed-count');
+    const correctSpan = document.getElementById('correct-count');
+    const wrongCountSpan = document.getElementById('wrong-count');
+    const btnAll = document.getElementById('btn-all');
+    const btnWrong = document.getElementById('btn-wrong');
+
+    let answeredQuestions = {};
+    let wrongIds = new Set();
+    let currentMode = 'all';
+
+    totalSpan.textContent = questions.length;
+
+    function renderQuestions() {
+        const selectedUnit = filter.value;
+        let displayQuestions = questions;
+
+        if (selectedUnit !== 'all') {
+            displayQuestions = displayQuestions.filter(q => q.unit === parseInt(selectedUnit));
+        }
+
+        if (currentMode === 'wrong') {
+            displayQuestions = displayQuestions.filter(q => wrongIds.has(q.id));
+        }
+
+        container.innerHTML = '';
+        if (displayQuestions.length === 0) {
+            container.innerHTML = `<div class="empty-wrong">✨ 暂无错题，继续保持！</div>`;
+        }
+
+        displayQuestions.forEach(q => {
+            const div = document.createElement('div');
+            div.className = 'question-item';
+            div.id = `q-${q.id}`;
+
+            const header = document.createElement('div');
+            header.className = 'q-header';
+            const statusText = answeredQuestions[q.id] !== undefined ? (answeredQuestions[q.id] === q.answer ? '✅ 回答正确' : '❌ 回答错误') : '⏳ 未作答';
+            const statusClass = answeredQuestions[q.id] !== undefined ? (answeredQuestions[q.id] === q.answer ? 'passed' : 'failed') : 'pending';
+            header.innerHTML = `<span>Unit ${q.unit} - Question ${q.id}</span><span class="status-badge ${statusClass}">${statusText}</span>`;
+            div.appendChild(header);
+
+            const sentence = document.createElement('div');
+            sentence.className = 'q-sentence';
+            sentence.innerHTML = q.sentence;
+            div.appendChild(sentence);
+
+            const trans = document.createElement('div');
+            trans.className = 'q-translation';
+            trans.textContent = `【译】${q.translation}`;
+            div.appendChild(trans);
+
+            const optContainer = document.createElement('div');
+            optContainer.className = 'options';
+            
+            const labels = ['A', 'B', 'C', 'D'];
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                
+                let optHtml = `<span>${labels[index]}. ${opt}</span>`;
+                if (answeredQuestions[q.id] !== undefined) {
+                    optHtml += `<span class="opt-mean">(${q.options_meaning[index]})</span>`;
+                }
+                btn.innerHTML = optHtml;
+                
+                btn.dataset.qid = q.id;
+                btn.dataset.index = index;
+
+                if (answeredQuestions[q.id] !== undefined) {
+                    btn.classList.add('disabled');
+                    const userChoice = answeredQuestions[q.id];
+                    if (index === q.answer) {
+                        btn.classList.add('correct');
+                    } else if (index === userChoice && userChoice !== q.answer) {
+                        btn.classList.add('wrong');
+                    } else if (index === q.answer && userChoice !== q.answer) {
+                        btn.classList.add('show-answer');
+                    }
+                }
+
+                btn.addEventListener('click', () => handleAnswer(q.id, index));
+                optContainer.appendChild(btn);
+            });
+            div.appendChild(optContainer);
+            container.appendChild(div);
+        });
+
+        let totalCompleted = 0, totalCorrect = 0;
+        for (let id in answeredQuestions) {
+            const qData = questions.find(q => q.id === parseInt(id));
+            if (qData) {
+                totalCompleted++;
+                if (answeredQuestions[id] === qData.answer) totalCorrect++;
+            }
+        }
+        completedSpan.textContent = totalCompleted;
+        correctSpan.textContent = totalCorrect;
+        wrongCountSpan.textContent = wrongIds.size;
+        btnWrong.innerHTML = `❌ 错题本 (<span id="wrong-count">${wrongIds.size}</span>)`;
+    }
+
+    function handleAnswer(qId, selectedIndex) {
+        if (answeredQuestions.hasOwnProperty(qId)) return;
+        const qData = questions.find(q => q.id === qId);
+        if (!qData) return;
+
+        answeredQuestions[qId] = selectedIndex;
+        if (selectedIndex !== qData.answer) {
+            wrongIds.add(qId);
+        }
+        renderQuestions(); 
+    }
+
+    function switchMode(mode) {
+        currentMode = mode;
+        btnAll.classList.remove('active');
+        btnWrong.classList.remove('active');
+        if (mode === 'all') {
+            btnAll.classList.add('active');
+        } else {
+            btnWrong.classList.add('active');
+        }
+        renderQuestions();
+    }
+
+    function resetWrongBook() {
+        if (wrongIds.size === 0) {
+            alert('当前没有错题！');
+            return;
+        }
+        if (confirm('确定要清空错题本吗？（此操作不会清除已作答记录）')) {
+            wrongIds.clear();
+            renderQuestions();
+        }
+    }
+
+    filter.addEventListener('change', renderQuestions);
+    renderQuestions();
+</script>
+</body>
+</html>
